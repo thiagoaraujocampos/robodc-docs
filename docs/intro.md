@@ -3,46 +3,71 @@ slug: /
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Introdução ao RobôDC
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Bem-vindo à documentação oficial do projeto RobôDC, o robô do Departamento de Computação (DC) da Universidade Federal de São Carlos (UFSCar)!
 
-## Getting Started
+<img src="/img/cover.svg" alt="Cover" style={{ width: '65%' }} />
 
-Get started by **creating a new site**.
+## Sobre o Projeto
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+O RobôDC é um projeto de robótica desenvolvido na UFSCar que visa criar uma plataforma robótica autônoma utilizando ROS (Robot Operating System).
 
-### What you'll need
+O projeto está dividido em duas gerações:
+- 1ª Geração: Baseada em ROS 1 Noetic
+- 2ª Geração: Evolução usando ROS 2 Humble
 
-- [Node.js](https://nodejs.org/en/download/) version 20.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+## Início Rápido
 
-## Generate a new site
+Para começar rapidamente:
 
-Generate a new Docusaurus site using the **classic template**.
+- Usuário da 1ª Geração: Veja [Começando - 1ª Geração](robo-1gen/comecando/prerequisitos)
+- Usuário da 2ª Geração: Veja [Começando - 2ª Geração](robo-2gen/comecando/prerequisitos)
+- Desenvolvedor: Veja [Como Contribuir](desenvolvimento/como-contribuir)
 
-The classic template will automatically be added to your project after you run the command:
+## Como Navegar nesta Documentação
 
-```bash
-npm init docusaurus@latest my-website classic
-```
+Esta documentação está organizada de forma hierárquica para facilitar o acesso às informações:
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+### Introdução
+Conceitos gerais, arquitetura e visão geral do projeto.
 
-The command also installs all necessary dependencies you need to run Docusaurus.
+### Repositórios
+Organização dos repositórios e convenções utilizadas.
 
-## Start your site
+### Robô de 1ª Geração
+Documentação completa do robô baseado em ROS 1:
+- Instalação e configuração
+- Hardware e software
+- Funcionalidades e implantação
 
-Run the development server:
+### Robô de 2ª Geração
+Documentação da evolução para ROS 2:
+- Melhorias implementadas
+- Novo sistema de navegação
+- Comunicação e deployment
 
-```bash
-cd my-website
-npm run start
-```
+### Operação do Sistema
+Guias práticos para operar ambas as gerações do robô.
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+### Metodologia e Resultados
+Experimentos realizados e análises comparativas.
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
+### Testes e Validação
+Procedimentos de teste em bancada e ambiente real.
 
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+### Desenvolvimento
+Guias para contribuir com o projeto.
+
+### Referências
+Documentos, bibliografia e links úteis.
+
+## Precisa de Ajuda?
+
+- Consulte a seção de Troubleshooting
+- Veja as Limitações Conhecidas
+- Entre em contato com a equipe
+
+---
+
+Última atualização: Novembro 2025

@@ -4,27 +4,59 @@
  * work well for content-centric websites.
  */
 
-/* You can override the default Infima variables here. */
+/* ===== LIGHT MODE ===== */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  /* Cor primária (links, botões, itens selecionados) */
+  --ifm-color-primary: #076CA1;
+  --ifm-color-primary-dark: #065E8C;
+  --ifm-color-primary-darker: #05547E;
+  --ifm-color-primary-darkest: #044262;
+
+  --ifm-color-primary-light: #1C7FB5;
+  --ifm-color-primary-lighter: #3D9AD1;
+  --ifm-color-primary-lightest: #72C3EE;
+
+  /* Tipografia e fundo */
+  --ifm-font-color-base: #1C1B1F;     /* texto principal */
+  --ifm-background-color: #FFFFFF;    /* fundo principal */
+
+  /* Código */
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.06);
+
+  /* Tons complementares */
+  --ifm-color-secondary: #5B5D5D;     /* cinza neutro */
+  --ifm-navbar-background-color: #FFFFFF;
+  --ifm-footer-background-color: #1C4D63;  /* azul escuro elegante */
+  --ifm-footer-link-color: #FFFFFF;
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
+/* ===== DARK MODE ===== */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  /* Primária adaptada para contraste no fundo escuro */
+  --ifm-color-primary: #72C3EE;        /* tom claro derivado do #076CA1 */
+  --ifm-color-primary-dark: #4FA6D8;
+  --ifm-color-primary-darker: #3C8DBF;
+  --ifm-color-primary-darkest: #2E6F96;
+
+  --ifm-color-primary-light: #99D5F6;
+  --ifm-color-primary-lighter: #C2E8FA;
+  --ifm-color-primary-lightest: #E8F7FF;
+
+  /* Fundo e texto */
+  --ifm-background-color: #1C1B1F;
+  --ifm-font-color-base: #FFFFFF;
+
+  /* Destaque de código */
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.08);
+
+  /* Outros */
+  --ifm-navbar-background-color: #1C1B1F;
+  --ifm-footer-background-color: #1C4D63;
+  --ifm-footer-link-color: #FFFFFF;
+}
+
+.navbar__brand > .navbar__title {
+  margin-left: 10px;
+  font-weight: 500;
 }
