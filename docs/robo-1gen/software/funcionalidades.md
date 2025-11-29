@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Funcionalidades Principais - 1ª Geração
+# Funcionalidades Principais
 
 ## Navegação Autônoma
 

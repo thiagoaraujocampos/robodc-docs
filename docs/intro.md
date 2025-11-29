@@ -28,7 +28,7 @@ O projeto está dividido em duas gerações:
 
 Para começar rapidamente:
 
-- Usuário da 1ª Geração: Veja [Começando - 1ª Geração](robo-1gen/comecando/prerequisitos)
+- Usuário da 1ª Geração: Veja [Instalação - 1ª Geração](robo-1gen/instalacao)
 - Usuário da 2ª Geração: Veja [Começando - 2ª Geração](robo-2gen/comecando/prerequisitos)
 - Desenvolvedor: Veja [Como Contribuir](desenvolvimento/como-contribuir)
 

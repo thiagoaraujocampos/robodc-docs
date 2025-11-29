@@ -2,217 +2,292 @@
 sidebar_position: 4
 ---
 
-# Implantação - 1ª Geração
+# Implantação e Operação
 
-## Preparação do Sistema Base
+## Visão Geral da Implantação
 
-### 1. Instalação do Ubuntu 20.04
+Este guia cobre a implantação completa do RobôDC de 1ª geração no Departamento de Computação da UFSCar, desde a configuração inicial até operação autônoma em produção.
 
-#### Download e Criação de Mídia Bootável
+## Preparação do Ambiente
+
+### 1. Mapeamento do DC (SLAM)
+
+Antes de operar o robô autonomamente, é necessário criar um mapa 2D do ambiente.
+
+#### Equipamentos Necessários
+- Robô montado e funcionando
+- Laptop/computador com ROS (para RViz e teleoperação)
+- Conexão SSH ou rede ROS configurada
+
+#### Procedimento de Mapeamento
+
 ```bash
-# Para Raspberry Pi 4
-# Baixar: Ubuntu 20.04 LTS Server ARM64 de ubuntu.com/download/raspberry-pi
-# Usar Raspberry Pi Imager ou Balena Etcher para gravar no SD Card (mínimo 32GB)
+# No Raspberry Pi 4 (robô)
+# Terminal 1: Iniciar roscore
+roscore
 
-# Para Intel NUC
-# Baixar: Ubuntu 20.04 LTS Desktop AMD64
-# Criar pendrive bootável com Rufus (Windows) ou dd (Linux)
+# Terminal 2: Iniciar mobile_rob_dev
+rosrun mobile_rob_dev mobile_rob_dev_node
+
+# Terminal 3: Iniciar Hokuyo LiDAR
+rosrun urg_node urg_node _ip_address:=192.168.0.10
+
+# Terminal 4: Iniciar GMapping para SLAM
+rosrun gmapping slam_gmapping scan:=/scan
 ```
 
-#### Primeira Inicialização
 ```bash
-# Conectar monitor, teclado e ethernet
-# Login padrão (Raspberry Pi): ubuntu/ubuntu (será solicitado trocar senha)
-
-# Expandir filesystem (Raspberry Pi)
-sudo apt update
-sudo apt install raspi-config
-sudo raspi-config
-# Advanced Options → Expand Filesystem
-
-# Configurar hostname
-sudo hostnamectl set-hostname robodc-1gen
-
-# Atualizar sistema
-sudo apt update
-sudo apt upgrade -y
-```
-
-### 2. Instalação do ROS Noetic
-
-```bash
-# Configurar sources.list
-sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-
-# Adicionar chave do repositório
-curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
-
-# Atualizar índice de pacotes
-sudo apt update
-
-# Instalar ROS Noetic Desktop Full (para desenvolvimento)
-# OU ROS Base (para produção, economiza espaço)
-sudo apt install ros-noetic-desktop-full  # ~2.5GB
-# sudo apt install ros-noetic-ros-base    # ~300MB (produção)
-
-# Configurar environment
-echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
-source ~/.bashrc
-
-# Instalar ferramentas de build
-sudo apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential python3-catkin-tools
-
-# Inicializar rosdep
-sudo rosdep init
-rosdep update
-```
-
-### 3. Configuração de Rede
-
-#### Para Operação Standalone
-```bash
-# Editar ~/.bashrc
-nano ~/.bashrc
-
-# Adicionar ao final:
-export ROS_MASTER_URI=http://localhost:11311
-export ROS_IP=$(hostname -I | awk '{print $1}')
-export ROS_HOSTNAME=$(hostname)
-```
-
-#### Para Operação com Computador Remoto
-```bash
-# No robô
-export ROS_MASTER_URI=http://robodc-1gen.local:11311  # ou IP do robô
-export ROS_IP=$(hostname -I | awk '{print $1}')
-
 # No computador de desenvolvimento
+# Configurar variáveis ROS para apontar para o robô
 export ROS_MASTER_URI=http://robodc-1gen.local:11311
-export ROS_IP=$(hostname -I | awk '{print $1}')
+export ROS_IP=192.168.1.50  # IP do seu computador
+
+# Terminal 1: Visualizar no RViz
+rviz
+
+# No RViz, adicionar displays:
+# - Map (topic: /map)
+# - LaserScan (topic: /scan)
+# - RobotModel
+# - TF
+
+# Terminal 2: Controlar robô com teclado
+sudo apt install ros-noetic-teleop-twist-keyboard
+rosrun teleop_twist_keyboard teleop_twist_keyboard.py cmd_vel:=/robot/cmd_vel
 ```
 
-### 4. Configuração de Permissões e Dispositivos
+#### Dicas para Bom Mapeamento
+1. **Velocidade**: Mova o robô LENTAMENTE (~0.2 m/s)
+2. **Cobertura**: Passe por todos os corredores, salas e áreas
+3. **Sobreposição**: Faça loops fechados (volte ao ponto inicial)
+4. **Ângulos**: Gire em diferentes ângulos para melhor cobertura
+5. **Tempo**: Leva aproximadamente 30-60 minutos para mapear o DC completo
+
+#### Salvar Mapa
+
+Quando o mapeamento estiver completo:
 
 ```bash
-# Adicionar usuário aos grupos necessários
-sudo usermod -aG dialout $USER
-sudo usermod -aG video $USER
-sudo usermod -aG gpio $USER  # Apenas Raspberry Pi
+# No Raspberry Pi ou computador de desenvolvimento
+cd ~/laris_wksp/maps/
+rosrun map_server map_saver -f dc_ufscar_map
 
-# Criar regras udev
-sudo nano /etc/udev/rules.d/99-robodc.rules
+# Arquivos gerados:
+# - dc_ufscar_map.yaml (metadados do mapa)
+# - dc_ufscar_map.pgm  (imagem do mapa)
 ```
 
-Conteúdo do arquivo:
-```
-# RPLidar
-KERNEL=="ttyUSB*", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", MODE:="0666", GROUP:="dialout", SYMLINK+="rplidar"
-
-# Arduino (se usado para controle de motores)
-KERNEL=="ttyACM*", ATTRS{idVendor}=="2341", MODE:="0666", GROUP:="dialout", SYMLINK+="arduino"
-
-# Câmera USB
-SUBSYSTEM=="video4linux", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="082d", MODE:="0666", GROUP:="video", SYMLINK+="camera"
+Editar `dc_ufscar_map.yaml` se necessário:
+```yaml
+image: dc_ufscar_map.pgm
+resolution: 0.05  # metros por pixel
+origin: [-50.0, -50.0, 0.0]  # [x, y, yaw]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
 ```
 
-Aplicar regras:
-```bash
-sudo udevadm control --reload-rules
-sudo udevadm trigger
-```
+### 2. Configurar Localizações dos 17 Locais
 
-## Instalação do Software RobôDC
+Após criar o mapa, anote as coordenadas (x, y) de cada local do DC.
 
-### 1. Clonar Repositórios
+#### Método 1: Via RViz (Recomendado)
 
 ```bash
-# Criar workspace
-mkdir -p ~/robodc_ws/src
-cd ~/robodc_ws/src
+# Carregar mapa no RViz
+rosrun map_server map_server dc_ufscar_map.yaml
+rviz
 
-# Clonar pacotes
-git clone https://github.com/robodc/robodc_bringup.git
-git clone https://github.com/robodc/robodc_description.git
-git clone https://github.com/robodc/robodc_control.git
-git clone https://github.com/robodc/robodc_sensors.git
-git clone https://github.com/robodc/robodc_navigation.git
-git clone https://github.com/robodc/robodc_msgs.git
+# No RViz:
+# 1. Adicionar display "Map" (topic: /map)
+# 2. Usar tool "Publish Point" para clicar nos locais
+# 3. Ver coordenadas no terminal:
+rostopic echo /clicked_point
 
-# OU clonar repositório monorepo
-# git clone --recursive https://github.com/robodc/robodc_1gen.git
+# Anotar coordenadas de cada local
 ```
 
-### 2. Instalar Dependências
+#### Método 2: Editar Imagem do Mapa
 
-```bash
-cd ~/robodc_ws
-
-# Instalar dependências ROS
-rosdep install --from-paths src --ignore-src -r -y
-
-# Instalar dependências Python adicionais (se necessário)
-pip3 install numpy scipy matplotlib
+Usar GIMP ou visualizador de imagens para identificar pixels e converter para metros:
+```
+x_metros = (pixel_x * resolution) + origin_x
+y_metros = (pixel_y * resolution) + origin_y
 ```
 
-### 3. Compilar
+#### Coordenadas dos 17 Locais (Exemplo - AJUSTAR!)
 
-```bash
-cd ~/robodc_ws
+Estas coordenadas devem ser determinadas no seu mapa real:
 
-# Compilar com otimização Release
-catkin build --cmake-args -DCMAKE_BUILD_TYPE=Release
-
-# OU com catkin_make
-# catkin_make -DCMAKE_BUILD_TYPE=Release
-
-# Source do workspace
-source devel/setup.bash
-echo "source ~/robodc_ws/devel/setup.bash" >> ~/.bashrc
+```python
+available_locals = {
+    "LE-1": (-37.99, -5.45, 1.0, 0.0),      # Laboratório de Ensino 1
+    "LE-2": (-30.15, -5.03, 1.0, 0.0),      # Laboratório de Ensino 2
+    "LE-3": (-22.68, -4.45, 1.0, 0.0),      # Laboratório de Ensino 3
+    "LE-4": (-15.36, -4.11, 1.0, 0.0),      # Laboratório de Ensino 4
+    "LE-5": (9.75, -2.36, 1.0, 0.0),        # Laboratório de Ensino 5
+    "Suporte": (-11.30, -3.92, 1.0, 0.0),   # Suporte Técnico
+    "PPG-CC4": (-2.54, -3.12, 1.0, 0.0),    # Pós-Graduação CC4
+    "Maker": (7.46, -2.39, 1.0, 0.0),       # Espaço Maker
+    "Auditorio": (15.37, -1.86, 1.0, 0.0),  # Auditório
+    "Banheiros": (-38.74, -10.59, 1.0, 0.0),# Banheiros
+    "Copa": (-38.43, -16.47, 1.0, 0.0),     # Copa
+    "Lig": (-38.01, -22.61, 1.0, 0.0),      # LIG (Lab. de Inteligência Computacional)
+    "Reunioes": (-15.52, -23.80, 1.0, 0.0), # Sala de Reuniões
+    "Chefia": (-12.49, -23.54, 1.0, 0.0),   # Chefia do Departamento
+    "Graduacao": (-18.67, -24.17, 1.0, 0.0),# Secretaria de Graduação
+    "Recepcao": (-12.49, -23.54, 1.0, 0.0), # Recepção
+    "Home": (-1.65, -21.18, 1.0, 0.0)       # Posição inicial (Home)
+}
 ```
 
-### 4. Verificar Instalação
+**Formato**: `(x, y, orientation_z, orientation_w)` em metros e quaternion
 
-```bash
-# Verificar pacotes
-rospack list | grep robodc
+#### Atualizar Coordenadas na API
 
-# Testar sensores individualmente
-roslaunch robodc_sensors rplidar.launch  # Deve conectar ao LIDAR
-roslaunch robodc_sensors camera.launch   # Deve abrir câmera
-roslaunch robodc_sensors imu.launch      # Deve publicar /imu/data
+Editar `~/RoboDC_api/src/controllers/ros_controller.py`:
+
+```python
+available_locals = {
+    "LE-1": (-37.99, -5.45, 1.0, 0.0),
+    # ... suas coordenadas reais aqui
+}
 ```
 
-## Configuração para Inicialização Automática
+## Configuração da API REST
 
-### Criar Serviço Systemd
+### 1. Instalar e Configurar API
 
 ```bash
-sudo nano /etc/systemd/system/robodc.service
+cd ~
+git clone https://github.com/Hugo-Souza/RoboDC_api.git
+cd RoboDC_api
+
+# Criar ambiente virtual
+python3 -m venv venv
+source venv/bin/activate
+
+# Instalar dependências
+pip install -r requirements.txt
+```
+
+### 2. Configurar Bluetooth (ESP32 para LEDs)
+
+```bash
+# Instalar bluez
+sudo apt install bluetooth bluez libbluetooth-dev
+
+# Emparelhar ESP32
+bluetoothctl
+scan on
+# Aguardar detectar: 8C:AA:B5:93:69:EE
+pair 8C:AA:B5:93:69:EE
+trust 8C:AA:B5:93:69:EE
+exit
+```
+
+### 3. Testar API Manualmente
+
+```bash
+# Terminal 1: roscore
+roscore
+
+# Terminal 2: mobile_rob_dev
+rosrun mobile_rob_dev mobile_rob_dev_node
+
+# Terminal 3: move_base (navegação)
+rosrun move_base move_base
+
+# Terminal 4: API
+cd ~/RoboDC_api
+source venv/bin/activate
+python3 app.py
+
+# Testar endpoints
+curl http://localhost:5000/metadata/version
+curl http://localhost:5000/ros/available_locals
+curl http://localhost:5000/ros/goTo/LE-1
+```
+
+## Configuração do Aplicativo Móvel (Tablet)
+
+### 1. Instalar APK no Tablet Android
+
+```bash
+# No computador de desenvolvimento
+cd ~
+git clone https://github.com/thiagoaraujocampos/RoboDC.git
+cd RoboDC
+npm install
+ionic capacitor build android
+
+# Gerar APK
+cd android
+./gradlew assembleDebug
+# APK em: android/app/build/outputs/apk/debug/app-debug.apk
+
+# Transferir para tablet via USB ou Google Drive
+# Instalar APK no tablet
+```
+
+### 2. Configurar Endereço da API no App
+
+Editar `src/environments/environment.ts`:
+
+```typescript
+export const environment = {
+  production: false,
+  apiUrl: 'http://192.168.1.100:5000'  // IP do Raspberry Pi 4
+};
+```
+
+Rebuildar e reinstalar APK.
+
+### 3. Conectar Tablet ao Wi-Fi MrRoboto
+
+No tablet:
+1. Configurações → Wi-Fi
+2. Conectar à rede "MrRoboto"
+3. Senha: [sua_senha]
+
+### 4. Emparelhar Bluetooth (ESP32)
+
+No aplicativo:
+1. Abrir aba "Expressões"
+2. Botão "Conectar Bluetooth"
+3. Selecionar dispositivo ESP32 (`8C:AA:B5:93:69:EE`)
+4. Testar expressões faciais
+
+## Inicialização Automática (Systemd)
+
+### 1. Criar Serviço para ROS + mobile_rob_dev
+
+```bash
+sudo nano /etc/systemd/system/robodc-ros.service
 ```
 
 Conteúdo:
 ```ini
 [Unit]
-Description=RoboDC 1st Generation Robot System
+Description=RoboDC ROS Core and mobile_rob_dev
 After=network.target
 
 [Service]
-Type=simple
+Type=forking
 User=ubuntu
-Group=ubuntu
-WorkingDirectory=/home/ubuntu/robodc_ws
+Environment="ROS_MASTER_URI=http://localhost:11311"
+Environment="ROS_IP=192.168.1.100"
 
-# Iniciar roscore e aguardar
+# Iniciar roscore em background
 ExecStartPre=/bin/bash -c 'source /opt/ros/noetic/setup.bash && roscore &'
 ExecStartPre=/bin/sleep 5
 
-# Iniciar sistema do robô
-ExecStart=/bin/bash -c 'source /opt/ros/noetic/setup.bash && source /home/ubuntu/robodc_ws/devel/setup.bash && roslaunch robodc_bringup robot.launch'
+# Iniciar mobile_rob_dev
+ExecStart=/bin/bash -c 'source /opt/ros/noetic/setup.bash && source /home/ubuntu/laris_wksp/devel/setup.bash && rosrun mobile_rob_dev mobile_rob_dev_node &'
 
-# Desligar graciosamente
-ExecStop=/usr/bin/killall -SIGINT roslaunch
+ExecStop=/usr/bin/killall -SIGINT roslaunch rosrun
 ExecStop=/bin/sleep 2
-ExecStop=/usr/bin/killall -9 rosmaster
+ExecStop=/usr/bin/killall -9 roscore rosmaster
 
 Restart=on-failure
 RestartSec=10
@@ -221,192 +296,367 @@ RestartSec=10
 WantedBy=multi-user.target
 ```
 
-Habilitar serviço:
-```bash
-sudo systemctl daemon-reload
-sudo systemctl enable robodc.service
-sudo systemctl start robodc.service
-
-# Verificar status
-sudo systemctl status robodc.service
-
-# Ver logs
-journalctl -u robodc.service -f
-```
-
-### Script de Inicialização Alternativo (sem systemd)
+### 2. Criar Serviço para Hokuyo LiDAR
 
 ```bash
-# Criar script
-nano ~/start_robodc.sh
+sudo nano /etc/systemd/system/robodc-lidar.service
 ```
 
 Conteúdo:
-```bash
-#!/bin/bash
+```ini
+[Unit]
+Description=RoboDC Hokuyo LiDAR
+After=robodc-ros.service
+Requires=robodc-ros.service
 
-# Source ROS
-source /opt/ros/noetic/setup.bash
-source ~/robodc_ws/devel/setup.bash
+[Service]
+Type=simple
+User=ubuntu
+Environment="ROS_MASTER_URI=http://localhost:11311"
+Environment="ROS_IP=192.168.1.100"
 
-# Esperar rede estar pronta
-sleep 10
+ExecStart=/bin/bash -c 'source /opt/ros/noetic/setup.bash && rosrun urg_node urg_node _ip_address:=192.168.0.10'
 
-# Iniciar roscore em background
-roscore &
-sleep 5
+Restart=on-failure
+RestartSec=5
 
-# Iniciar sistema do robô
-roslaunch robodc_bringup robot.launch
+[Install]
+WantedBy=multi-user.target
 ```
 
-Tornar executável e adicionar ao cron:
-```bash
-chmod +x ~/start_robodc.sh
+### 3. Criar Serviço para Navegação (move_base + AMCL)
 
-# Adicionar ao crontab para iniciar no boot
-crontab -e
-# Adicionar linha:
-@reboot /home/ubuntu/start_robodc.sh >> /home/ubuntu/robodc.log 2>&1
+```bash
+sudo nano /etc/systemd/system/robodc-navigation.service
 ```
 
-## Criação de Imagem do Sistema
+Conteúdo:
+```ini
+[Unit]
+Description=RoboDC Navigation Stack
+After=robodc-lidar.service
+Requires=robodc-lidar.service
 
-### Backup Completo (Raspberry Pi)
+[Service]
+Type=simple
+User=ubuntu
+Environment="ROS_MASTER_URI=http://localhost:11311"
+Environment="ROS_IP=192.168.1.100"
 
-```bash
-# No computador de desenvolvimento (Linux)
-# Com SD card do Raspberry conectado via leitor USB
+# Carregar mapa e iniciar AMCL + move_base
+ExecStart=/bin/bash -c 'source /opt/ros/noetic/setup.bash && source /home/ubuntu/laris_wksp/devel/setup.bash && roslaunch [seu_package] navigation.launch map_file:=/home/ubuntu/laris_wksp/maps/dc_ufscar_map.yaml'
 
-# Identificar dispositivo
-lsblk  # Ex: /dev/sdb
+Restart=on-failure
+RestartSec=10
 
-# Criar imagem
-sudo dd if=/dev/sdb of=~/robodc-1gen-image.img bs=4M status=progress
-
-# Comprimir imagem
-gzip -9 ~/robodc-1gen-image.img
-# Resultado: robodc-1gen-image.img.gz (~4-8GB dependendo do cartão)
-
-# Para restaurar em outro SD card:
-gunzip robodc-1gen-image.img.gz
-sudo dd if=robodc-1gen-image.img of=/dev/sdb bs=4M status=progress
+[Install]
+WantedBy=multi-user.target
 ```
 
-### Backup do Workspace (Intel NUC ou multiplataforma)
+### 4. Criar Serviço para API REST
 
 ```bash
-# No robô, criar tarball do workspace
-cd ~
-tar -czf robodc-workspace-backup.tar.gz robodc_ws/
-
-# Incluir configurações
-tar -czf robodc-config-backup.tar.gz .bashrc /etc/udev/rules.d/99-robodc.rules /etc/systemd/system/robodc.service
-
-# Copiar para computador remoto
-scp robodc-*.tar.gz usuario@computador-remoto:~/backups/
+sudo nano /etc/systemd/system/robodc-api.service
 ```
 
-## Procedimentos de Manutenção
+Conteúdo:
+```ini
+[Unit]
+Description=RoboDC REST API (Flask)
+After=robodc-navigation.service
+Requires=robodc-navigation.service
 
-### Atualização de Software
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/RoboDC_api
 
-```bash
-# Parar sistema
-sudo systemctl stop robodc.service
+ExecStart=/home/ubuntu/RoboDC_api/venv/bin/python3 /home/ubuntu/RoboDC_api/app.py
 
-# Atualizar código
-cd ~/robodc_ws/src/robodc_bringup  # ou outro pacote
-git pull origin main
+Restart=on-failure
+RestartSec=5
 
-# Recompilar apenas pacotes modificados
-cd ~/robodc_ws
-catkin build robodc_bringup  # apenas o pacote alterado
-
-# Reiniciar sistema
-sudo systemctl start robodc.service
+[Install]
+WantedBy=multi-user.target
 ```
 
-### Verificação de Saúde do Sistema
+### 5. Habilitar e Iniciar Serviços
 
 ```bash
-# Verificar uso de disco
-df -h
+# Recarregar systemd
+sudo systemctl daemon-reload
 
-# Verificar memória
-free -h
+# Habilitar serviços (iniciar no boot)
+sudo systemctl enable robodc-ros.service
+sudo systemctl enable robodc-lidar.service
+sudo systemctl enable robodc-navigation.service
+sudo systemctl enable robodc-api.service
 
-# Verificar temperatura (Raspberry Pi)
-vcgencmd measure_temp
+# Iniciar serviços manualmente
+sudo systemctl start robodc-ros.service
+sudo systemctl start robodc-lidar.service
+sudo systemctl start robodc-navigation.service
+sudo systemctl start robodc-api.service
 
-# Verificar processos ROS
+# Verificar status
+sudo systemctl status robodc-ros.service
+sudo systemctl status robodc-lidar.service
+sudo systemctl status robodc-navigation.service
+sudo systemctl status robodc-api.service
+
+# Ver logs
+journalctl -u robodc-ros.service -f
+```
+
+## Operação em Produção
+
+### Inicialização do Sistema
+
+1. **Ligar baterias**:
+   - Bateria 1 (LiDAR) - interruptor 1
+   - Bateria 2 (sistema geral) - interruptor 2
+
+2. **Aguardar boot** (30-60 segundos)
+   - Raspberry Pi 4 inicia Ubuntu
+   - Serviços systemd são iniciados automaticamente
+
+3. **Verificar LEDs de status**:
+   - Raspberry Pi: LED verde piscando (atividade)
+   - LiDAR: LED girando (escaneando)
+   - ESP32: LEDs acesos (face padrão)
+
+4. **Conectar tablet**:
+   - Abrir aplicativo RobôDC
+   - Conectar Wi-Fi MrRoboto
+   - App deve mostrar status "Conectado"
+
+### Enviar Robô para um Local
+
+1. Abrir aba "Navegação" no app
+2. Selecionar local no mapa (ex: "Auditório")
+3. Confirmar "Guiar-me até lá"
+4. App mostra status "ACTIVE" (em movimento)
+5. Robô navega autonomamente
+6. Ao chegar, status muda para "SUCCEEDED"
+7. Robô anuncia via TTS: "Cheguei ao Auditório"
+
+### Mudar Expressão Facial
+
+1. Abrir aba "Expressões"
+2. Selecionar expressão (ex: "Feliz")
+3. Enviar comando via Bluetooth
+4. LEDs mudam imediatamente
+
+### Controle Manual (Emergência)
+
+1. Abrir aba "Controle Manual"
+2. Usar joystick virtual para mover robô
+3. Comandos são enviados diretamente para `/robot/cmd_vel`
+
+### Parada de Emergência
+
+- **Botão de Emergência Físico**: Pressionar botão vermelho no robô
+- **No App**: Aba "Navegação" → Botão "Cancelar"
+- **SSH**: `rostopic pub /robot/cmd_vel geometry_msgs/Twist` (velocidade zero)
+
+## Monitoramento e Diagnóstico
+
+### Monitoramento Remoto via SSH
+
+```bash
+# Conectar via SSH
+ssh ubuntu@robodc-1gen.local
+
+# Verificar serviços
+sudo systemctl status robodc-*.service
+
+# Ver nós ROS ativos
 rosnode list
-rostopic hz /scan  # verificar frequência de publicação
 
-# Verificar logs
-tail -f ~/.ros/log/latest/roslaunch-*.log
+# Ver tópicos
+rostopic list
+
+# Verificar frequência de sensores
+rostopic hz /scan       # Deve ser ~10 Hz
+rostopic hz /odom       # Deve ser ~40 Hz
+
+# Ver pose atual
+rostopic echo /amcl_pose -n 1
 ```
 
-### Limpeza de Logs
+### Dashboard de Monitoramento (Opcional)
+
+Usar `rqt` para interface gráfica:
 
 ```bash
-# ROS gera muitos logs, limpar periodicamente
-rosclean check  # Ver quanto espaço os logs ocupam
-rosclean purge  # Deletar todos os logs antigos
+# No computador de desenvolvimento
+export ROS_MASTER_URI=http://robodc-1gen.local:11311
+export ROS_IP=192.168.1.50
 
-# Limpar logs do sistema
-sudo journalctl --vacuum-time=7d  # Manter apenas últimos 7 dias
+rqt
 ```
 
-## Troubleshooting Pós-Implantação
+Plugins úteis:
+- **Topic Monitor**: Ver taxa de publicação
+- **Message Publisher**: Publicar mensagens manualmente
+- **Service Caller**: Chamar serviços
+- **TF Tree**: Visualizar árvore de transformadas
 
-### Robô não Inicia Automaticamente
+### Logs e Troubleshooting
+
 ```bash
-# Verificar status do serviço
-sudo systemctl status robodc.service
+# Logs do ROS
+tail -f ~/.ros/log/latest/rosout.log
 
-# Ver erros
-journalctl -u robodc.service -n 50
+# Logs dos serviços systemd
+journalctl -u robodc-ros.service -n 100
+journalctl -u robodc-api.service -f
 
-# Verificar se roscore está rodando
-pgrep -a roscore
+# Verificar erros ROS
+rosrun rqt_console rqt_console
 
-# Testar manualmente
-source /opt/ros/noetic/setup.bash
-source ~/robodc_ws/devel/setup.bash
-roslaunch robodc_bringup robot.launch
+# Diagnóstico geral
+roswtf
 ```
 
-### Sensores não Conectam
+## Manutenção Regular
+
+### Diária
+- ✅ Verificar nível de bateria
+- ✅ Limpar janela do LiDAR
+- ✅ Verificar logs de erro
+
+### Semanal
+- ✅ Verificar conexões físicas (cabos USB, Ethernet)
+- ✅ Limpar pó da estrutura
+- ✅ Testar navegação para todos os 17 locais
+- ✅ Verificar todas as 45 expressões faciais
+
+### Mensal
+- ✅ Atualizar software (`git pull`, `catkin build`)
+- ✅ Atualizar sistema operacional (`sudo apt upgrade`)
+- ✅ Backup do mapa e configurações
+- ✅ Verificar tensão das baterias VRLA (deve ser ~12V)
+- ✅ Limpar logs antigos (`rosclean purge`)
+
+### Trimestral
+- ✅ Recalibrar odometria (se necessário)
+- ✅ Atualizar mapa (se houve mudanças no DC)
+- ✅ Revisar parâmetros de navegação (DWA, costmaps)
+
+## Troubleshooting em Produção
+
+### Robô não liga
+- Verificar interruptores das baterias
+- Medir tensão das baterias (deve ser >11V)
+- Verificar fusíveis
+- Verificar conexões de alimentação
+
+### LiDAR não publica dados
+- Verificar cabo Ethernet conectado
+- Verificar IP: `ping 192.168.0.10`
+- Verificar se bateria dedicada do LiDAR está ligada
+- Reiniciar serviço: `sudo systemctl restart robodc-lidar.service`
+
+### Robô não navega (fica parado)
+- Verificar se Raspberry Pi Pico responde
+- Testar comando manual: `rostopic pub /robot/cmd_vel ...`
+- Verificar conexão serial: `ls -l /dev/ttyACM0`
+- Verificar logs do mobile_rob_dev
+
+### API não responde
+- Verificar se Flask está rodando: `ps aux | grep flask`
+- Testar localmente: `curl http://localhost:5000/metadata/version`
+- Verificar firewall: `sudo ufw status`
+- Reiniciar serviço: `sudo systemctl restart robodc-api.service`
+
+### Aplicativo não conecta
+- Verificar se tablet está em rede MrRoboto
+- Verificar IP da API no app (192.168.1.100)
+- Testar ping: `ping 192.168.1.100`
+- Verificar se API está rodando
+
+### Odometria deriva muito
+- Recalibrar parâmetros `wheel_radius` e `wheel_base`
+- Verificar aderência das rodas
+- Verificar piso (superfície escorregadia?)
+- Reinicializar AMCL no RViz ("2D Pose Estimate")
+
+## Backup e Recuperação
+
+### Criar Backup do Sistema
+
 ```bash
-# Verificar dispositivos USB
-lsusb
-ls -l /dev/ttyUSB* /dev/video*
+# Backup do workspace ROS
+cd ~
+tar -czf robodc-workspace-$(date +%Y%m%d).tar.gz laris_wksp/
 
-# Verificar permissões
-groups  # Deve incluir dialout, video
+# Backup da API
+tar -czf robodc-api-$(date +%Y%m%d).tar.gz RoboDC_api/
 
-# Recarregar regras udev
-sudo udevadm control --reload-rules
-sudo udevadm trigger
+# Backup de configurações
+sudo tar -czf robodc-config-$(date +%Y%m%d).tar.gz \
+  /etc/systemd/system/robodc-*.service \
+  /etc/udev/rules.d/99-robodc.rules \
+  /etc/netplan/
 
-# Reconectar dispositivos USB
+# Backup do mapa
+tar -czf robodc-maps-$(date +%Y%m%d).tar.gz laris_wksp/maps/
+
+# Copiar backups para servidor remoto
+scp robodc-*.tar.gz usuario@servidor:/backups/robodc/
 ```
 
-### Performance Baixa
+### Restaurar do Backup
+
 ```bash
-# Verificar CPU/memória
-top
-htop  # se instalado
+# Restaurar workspace
+cd ~
+tar -xzf robodc-workspace-20251129.tar.gz
 
-# Para Raspberry Pi: Reduzir carga
-# - Desabilitar RVIZ/GUI no launch file
-# - Reduzir resolução da câmera
-# - Reduzir frequência de publicação dos sensores
+# Recompilar
+cd laris_wksp
+catkin build
+source devel/setup.bash
 
-# Exemplo: Editar launch file para não usar GUI
-<arg name="gui" default="false"/>
+# Restaurar API
+cd ~
+tar -xzf robodc-api-20251129.tar.gz
+cd RoboDC_api
+pip3 install -r requirements.txt
+
+# Restaurar configurações
+sudo tar -xzf robodc-config-20251129.tar.gz -C /
+
+# Recarregar systemd
+sudo systemctl daemon-reload
 ```
+
+## Descomissionamento Seguro
+
+Quando precisar desligar o robô:
+
+```bash
+# 1. Parar serviços ROS
+sudo systemctl stop robodc-api.service
+sudo systemctl stop robodc-navigation.service
+sudo systemctl stop robodc-lidar.service
+sudo systemctl stop robodc-ros.service
+
+# 2. Desligar Raspberry Pi
+sudo shutdown -h now
+
+# 3. Aguardar 30 segundos
+
+# 4. Desligar baterias (interruptores)
+```
+
+---
+
+**Próximo**: [Software - Arquitetura ROS1](./software/arquitetura-ros1.md)
+
+**Ver também**: [Hardware](./hardware.md) | [Instalação](./instalacao.md)
+
 
 ```bash
 # Drivers de câmera

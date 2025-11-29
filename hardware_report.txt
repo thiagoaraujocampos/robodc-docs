@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+================================================================================
+INFORMA╟╒ES DE HARDWARE DO ROB╘ DC - 1¬ GERA╟├O
+================================================================================
+
+
+================================================================================
+KEYWORD: Raspberry Pi 4
+================================================================================
+
+Match 1:
+  File "C:\Users\Thiago\ufscar\robodc-docs\extract_hardware_info.py", line 57, in <module>
+    print(match)
+  File "C:\Python312\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u25cf' in position 33: character maps to <undefined>

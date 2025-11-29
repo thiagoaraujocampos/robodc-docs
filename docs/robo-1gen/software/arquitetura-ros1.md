@@ -6,98 +6,154 @@ sidebar_position: 1
 
 ## Visão Geral
 
-A arquitetura do robô de 1ª geração é baseada em ROS 1 (Robot Operating System) e segue o padrão de nós comunicando-se através de tópicos, serviços e actions.
+A arquitetura do robô de 1ª geração é baseada em **ROS 1 Noetic Ninjemys** rodando em Ubuntu 20.04 LTS. O sistema é composto pelo pacote principal `mobile_rob_dev` (do repositório vivaldini/ROBO_DC), que implementa controle de baixo nível, odometria e comunicação serial com o Arduino/Pico, além de pacotes padrão do ROS para navegação (move_base, AMCL) e sensoriamento (Hokuyo LiDAR).
 
-## Nós Principais
-
-### Diagrama de Nós
+## Arquitetura de Hardware + Software
 
 ```
-┌─────────────────────────────────────────────────┐
-│              ROS Master (roscore)               │
-└─────────────────────────────────────────────────┘
-           │
-           ├──── /camera_node
-           │         │ publishes: /camera/image_raw
-           │         │            /camera/camera_info
-           │
-           ├──── /lidar_node
-           │         │ publishes: /scan
-           │
-           ├──── /imu_node
-           │         │ publishes: /imu/data
-           │
-           ├──── /motor_controller
-           │         │ subscribes: /cmd_vel
-           │         │ publishes: /odom
-           │
-           ├──── /navigation_node
-           │         │ subscribes: /scan, /odom, /camera/image_raw
-           │         │ publishes: /cmd_vel, /path
-           │
-           └──── /state_machine
-                     │ publishes: /robot_state
-                     │ services: /set_mode
+┌─────────────────────────────────────────────────────────────────┐
+│                   RASPBERRY PI 4 (ROS MASTER)                   │
+│                                                                 │
+│  ┌─────────────┐   ┌──────────────┐   ┌────────────────────┐  │
+│  │ roscore     │   │ mobile_rob_  │   │ move_base          │  │
+│  │ (ROS Master)│◄──┤ dev_node     │◄──┤ (navigation)       │  │
+│  └─────────────┘   │ (40 Hz)      │   └────────────────────┘  │
+│                    │              │                            │
+│                    │ - Serial I/O │   ┌────────────────────┐  │
+│                    │ - Odometry   │◄──┤ amcl               │  │
+│                    │ - Cmd Vel    │   │ (localization)     │  │
+│                    └──────┬───────┘   └────────────────────┘  │
+│                           │                                    │
+│                           │ /dev/ttyACM0                       │
+│                           │ 115200 baud                        │
+└───────────────────────────┼────────────────────────────────────┘
+                            │ Serial (USB)
+┌───────────────────────────▼────────────────────────────────────┐
+│               ARDUINO / RASPBERRY PI PICO                       │
+│                                                                 │
+│  - Leitura de encoders                                          │
+│  - Controle PWM dos motores                                     │
+│  - Comunicação serial: envia (x, y, theta), recebe (vl, vr)    │
+└─────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────┐
+│                    HOKUYO LIDAR (Ethernet)                      │
+│                                                                 │
+│  - Conecta diretamente à RPi4 via RJ45                          │
+│  - Driver: urg_node ou hokuyo_node                              │
+│  - Publica /scan (sensor_msgs/LaserScan)                        │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
-### Descrição dos Nós
+## Pacote Principal: mobile_rob_dev
 
-#### `/rplidar_node`
-- **Pacote**: `rplidar_ros`
-- **Executável**: `rplidarNode`
-- **Função**: Interface com o LIDAR RPLidar A1/A2
-- **Taxa de Publicação**: 5.5 Hz (A1) ou 10 Hz (A2)
-- **Tópicos Publicados**: `/scan`
+### Estrutura do Código
 
-#### `/usb_cam` ou `/raspicam_node`
-- **Pacote**: `usb_cam` ou `raspicam_node`
-- **Executável**: `usb_cam_node` ou `raspicam_node`
-- **Função**: Captura e publica imagens da câmera
-- **Taxa de Publicação**: 30 Hz (configurável)
-- **Tópicos Publicados**: `/camera/image_raw`, `/camera/camera_info`
+```
+mobile_rob_dev/
+├── src/
+│   └── mobile_rob_dev/
+│       ├── robotMain.cpp        # Main loop do nó ROS
+│       ├── robotSystem.cpp      # Sistema: serial, odometria, ROS
+│       └── robot.cpp            # Classe Robot (cinemática, comandos)
+├── include/
+│   └── mobile_rob_dev/
+│       ├── robotSystem.h
+│       ├── robot.h
+│       └── definitions.h        # Constantes e definições
+├── scripts/
+│   └── send_goal.py             # Script para enviar goals (actionlib)
+├── launch/
+│   └── robot.launch             # Launch file principal
+├── CMakeLists.txt
+└── package.xml
+```
 
-#### `/imu_node`
-- **Pacote**: `imu_filter_madgwick` ou custom
-- **Executável**: `imu_filter_node`
-- **Função**: Publica dados da IMU com filtro de orientação
-- **Taxa de Publicação**: 100 Hz
-- **Tópicos Publicados**: `/imu/data`, `/imu/mag` (se disponível)
+### Nó Principal: `mobile_rob_dev_node`
 
-#### `/base_controller`
-- **Pacote**: `robodc_control`
-- **Executável**: `base_controller_node`
-- **Função**: Controla motores DC via L298N, lê encoders
-- **Taxa de Execução**: 50 Hz
-- **Tópicos Subscritos**: `/cmd_vel`
-- **Tópicos Publicados**: `/odom`
+#### Arquivo: robotMain.cpp
 
-#### `/robot_localization_ekf_node`
-- **Pacote**: `robot_localization`
-- **Executável**: `ekf_localization_node`
-- **Função**: Fusão sensorial (odometria + IMU) via Extended Kalman Filter
-- **Taxa de Execução**: 30 Hz
-- **Tópicos Subscritos**: `/odom`, `/imu/data`
-- **Tópicos Publicados**: `/odometry/filtered`
+```cpp
+int main(int argc, char **argv)
+{
+    ros::init(argc, argv, "mobile_rob_dev");
+    ros::NodeHandle n;
+    
+    // Instancia sistema do robô
+    System system(&n);
+    
+    // Loop principal a 40 Hz
+    ros::Rate loop_rate(40);
+    
+    while (ros::ok())
+    {
+        system.step();  // Atualiza sistema
+        ros::spinOnce();
+        loop_rate.sleep();
+    }
+    
+    return 0;
+}
+```
 
-#### `/move_base`
-- **Pacote**: `move_base`
-- **Executável**: `move_base`
-- **Função**: Navegação autônoma com planejamento global e local
-- **Taxa de Execução**: 10 Hz (controller)
-- **Actions**: `/move_base` (tipo: `move_base_msgs/MoveBaseAction`)
+**Características**:
+- Taxa de execução: **40 Hz** (25ms por ciclo)
+- Processa callbacks ROS (`ros::spinOnce()`)
+- Chama `system.step()` para atualizar estado
 
-#### `/amcl`
-- **Pacote**: `amcl`
-- **Executável**: `amcl`
-- **Função**: Localização Monte Carlo Adaptativa
-- **Tópicos Subscritos**: `/scan`, `/map`
-- **Tópicos Publicados**: `/amcl_pose`, `/particlecloud`
+#### Arquivo: robotSystem.cpp
 
-#### `/map_server`
-- **Pacote**: `map_server`
-- **Executável**: `map_server`
-- **Função**: Servidor de mapa estático
-- **Tópicos Publicados**: `/map`, `/map_metadata`
+Implementa a classe `System`, responsável por:
+
+1. **Comunicação Serial** (`setupSerial()`, `readSerial()`, `writeSerial()`)
+   - Porta: `/dev/ttyACM0` (Arduino/Pico via USB)
+   - Baud Rate: **115200 bps**
+   - Protocolo:
+     - **Recebe**: `x,y,theta\n` (posição do robô em metros e radianos)
+     - **Envia**: `vl,vr\n` (velocidades das rodas em m/s)
+
+2. **Odometria** (`updateOdometry()`)
+   - Calcula odometria diferencial
+   - Publica `/odom` (nav_msgs/Odometry)
+   - Publica `/pose2d` (geometry_msgs/Pose2D)
+   - Broadcast TF: `odom` → `base_link`
+
+3. **Controle de Velocidade** (`cmdVelCallback()`)
+   - Subscreve `/robot/cmd_vel` (geometry_msgs/Twist)
+   - Converte velocidade linear (vx) e angular (wz) para velocidades das rodas (vl, vr)
+   - Usa cinemática diferencial:
+     ```
+     vl = vx - (wz * wheel_base / 2)
+     vr = vx + (wz * wheel_base / 2)
+     ```
+
+4. **Parâmetros ROS** (`loadSettings()`)
+   - Carrega parâmetros do servidor ROS:
+     - `wheel_radius`: Raio da roda (metros)
+     - `wheel_base`: Distância entre rodas (metros)
+     - `max_linear_velocity`: Velocidade linear máxima (m/s)
+     - `max_angular_velocity`: Velocidade angular máxima (rad/s)
+
+**Pseudocódigo de `system.step()`**:
+```cpp
+void System::step()
+{
+    // 1. Ler dados do Arduino via serial
+    if (readSerial()) {
+        // Atualiza pose interna (x, y, theta)
+        robot_.updatePose(x, y, theta);
+        
+        // 2. Calcular e publicar odometria
+        updateOdometry();
+        
+        // 3. Broadcast TF odom -> base_link
+        publishTF();
+    }
+    
+    // 4. Enviar comandos de velocidade para Arduino
+    writeSerial(vl, vr);
+}
+```
 
 ## Tópicos e Mensagens
 

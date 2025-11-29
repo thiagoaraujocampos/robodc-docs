@@ -21,16 +21,9 @@ const sidebars: SidebarsConfig = {
       label: 'Robô de 1ª Geração',
       items: [
         'robo-1gen/visao-geral',
-        {
-          type: 'category',
-          label: 'Começando (1ª Geração)',
-          items: [
-            'robo-1gen/comecando/prerequisitos',
-            'robo-1gen/comecando/instalacao-execucao',
-            'robo-1gen/comecando/estrutura-repositorio',
-          ],
-        },
         'robo-1gen/hardware',
+        'robo-1gen/instalacao',
+        'robo-1gen/estrutura-repositorio',
         {
           type: 'category',
           label: 'Software',
