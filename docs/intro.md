@@ -10,7 +10,7 @@ Bem-vindo à documentação oficial do projeto RobôDC, o robô do Departamento 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
 <img 
-  src={useBaseUrl('/img/cover.svg')} 
+  src={useBaseUrl('/img/Cover.svg')} 
   alt="Cover" 
   style={{ width: '65%' }} 
 />
