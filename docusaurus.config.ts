@@ -22,7 +22,7 @@ const config: Config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'UFSCar', // Usually your GitHub org/user name.
+  organizationName: 'thiagoaraujocampos', // Usually your GitHub org/user name.
   projectName: 'robodc-docs', // Usually your repo name.
 
   onBrokenLinks: 'throw',

@@ -7,7 +7,14 @@ sidebar_position: 1
 
 Bem-vindo à documentação oficial do projeto RobôDC, o robô do Departamento de Computação (DC) da Universidade Federal de São Carlos (UFSCar)!
 
-<img src="/img/cover.svg" alt="Cover" style={{ width: '65%' }} />
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
+<img 
+  src={useBaseUrl('/img/cover.svg')} 
+  alt="Cover" 
+  style={{ width: '65%' }} 
+/>
+
 
 ## Sobre o Projeto
 
