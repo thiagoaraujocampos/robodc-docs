@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="pt-BR" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-visao-geral" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.2">
+<title data-rh="true">Visão Geral do Projeto | RobôDC Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://thiagoaraujocampos.github.io/robodc-docs/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://thiagoaraujocampos.github.io/robodc-docs/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://thiagoaraujocampos.github.io/robodc-docs/visao-geral"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Visão Geral do Projeto | RobôDC Docs"><meta data-rh="true" name="description" content="Esta página apresenta uma visão consolidada do projeto RobôDC enquanto iniciativa do Departamento de Computação (DC) da UFSCar: seus princípios de concepção, arquitetura geral, gerações de robôs e a organização dos repositórios de código."><meta data-rh="true" property="og:description" content="Esta página apresenta uma visão consolidada do projeto RobôDC enquanto iniciativa do Departamento de Computação (DC) da UFSCar: seus princípios de concepção, arquitetura geral, gerações de robôs e a organização dos repositórios de código."><link data-rh="true" rel="icon" href="/robodc-docs/img/icon.svg"><link data-rh="true" rel="canonical" href="https://thiagoaraujocampos.github.io/robodc-docs/visao-geral"><link data-rh="true" rel="alternate" href="https://thiagoaraujocampos.github.io/robodc-docs/visao-geral" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://thiagoaraujocampos.github.io/robodc-docs/visao-geral" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Visão Geral do Projeto","item":"https://thiagoaraujocampos.github.io/robodc-docs/visao-geral"}]}</script><link rel="alternate" type="application/rss+xml" href="/robodc-docs/blog/rss.xml" title="RobôDC Docs RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/robodc-docs/blog/atom.xml" title="RobôDC Docs Atom Feed"><link rel="stylesheet" href="/robodc-docs/assets/css/styles.a3c3a098.css">
+<script src="/robodc-docs/assets/js/runtime~main.d105e07d.js" defer="defer"></script>
+<script src="/robodc-docs/assets/js/main.d143c7cc.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||"light"),document.documentElement.setAttribute("data-theme-choice",t||"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/robodc-docs/img/TEXTO.svg"><link rel="preload" as="image" href="/robodc-docs/img/arqprojeto.png"><link rel="preload" as="image" href="/robodc-docs/img/basic_timeline.png"><div role="region" aria-label="Pular para o conteúdo principal"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Pular para o conteúdo principal</a></div><nav aria-label="Navegação principal" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Alternar painel de navegação" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/robodc-docs/"><div class="navbar__logo"><img src="/robodc-docs/img/TEXTO.svg" alt="RobôDC Text Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/robodc-docs/img/TEXTO.svg" alt="RobôDC Text Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Documentação do Projeto RobôDC</b></a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/thiagoaraujocampos/robodc-docs" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="modo do sistema" aria-label="Mudar entre modo claro e escuro (modo do sistema está ativo)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Voltar para o topo" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Painel lateral de documentos" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/robodc-docs/"><span title="Introdução ao RobôDC" class="linkLabel_WmDU">Introdução ao RobôDC</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/robodc-docs/visao-geral"><span title="Visão Geral do Projeto" class="linkLabel_WmDU">Visão Geral do Projeto</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/robodc-docs/robo-1gen/visao-geral"><span title="Robô de 1ª Geração" class="categoryLinkLabel_W154">Robô de 1ª Geração</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/robodc-docs/robo-2gen/visao-geral"><span title="Robô de 2ª Geração" class="categoryLinkLabel_W154">Robô de 2ª Geração</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/robodc-docs/operacao/operacao-1gen"><span title="Operação do Sistema" class="categoryLinkLabel_W154">Operação do Sistema</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/robodc-docs/metodologia/metodologia-experimentacao"><span title="Metodologia Experimental" class="categoryLinkLabel_W154">Metodologia Experimental</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/robodc-docs/desenvolvimento/como-contribuir"><span title="Desenvolvimento no Projeto" class="categoryLinkLabel_W154">Desenvolvimento no Projeto</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/robodc-docs/referencias/documentos"><span title="Referências e Materiais" class="categoryLinkLabel_W154">Referências e Materiais</span></a></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Trilha"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="Página Inicial" class="breadcrumbs__link" href="/robodc-docs/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">Visão Geral do Projeto</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">Nesta página</button></div><div class="theme-doc-markdown markdown"><header><h1>Visão Geral do Projeto</h1></header>
+<p>Esta página apresenta uma visão consolidada do <strong>projeto RobôDC</strong> enquanto iniciativa do Departamento de Computação (DC) da UFSCar: seus princípios de concepção, arquitetura geral, gerações de robôs e a organização dos repositórios de código.</p>
+<p>A ideia é responder à pergunta: <strong>“O que é o RobôDC como projeto de longo prazo?”</strong>, indo além de um único robô físico ou de uma única configuração.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="arquitetura-geral-do-robôdc">Arquitetura Geral do RobôDC<a href="#arquitetura-geral-do-robôdc" class="hash-link" aria-label="Link direto para Arquitetura Geral do RobôDC" title="Link direto para Arquitetura Geral do RobôDC" translate="no">​</a></h2>
+<p>O RobôDC é pensado como uma <strong>plataforma robótica móvel</strong> composta por:</p>
+<ul>
+<li class="">uma <strong>base física</strong> (hardware de locomoção, sensores, atuadores);</li>
+<li class="">uma <strong>camada de software</strong> (pilha de controle, integração de sensores, nós ROS);</li>
+<li class="">uma <strong>camada de projeto</strong> (padrões, documentação, repositórios e processos de desenvolvimento).</li>
+</ul>
+<p>Essas camadas são organizadas para permitir que diferentes grupos possam:</p>
+<ul>
+<li class="">reutilizar a mesma base física;</li>
+<li class="">substituir ou evoluir componentes de hardware e software;</li>
+<li class="">documentar e compartilhar o que foi feito, para que outros possam continuar o trabalho.</li>
+</ul>
+<img src="/robodc-docs/img/arqprojeto.png" alt="Arquitetura geral em camadas do projeto RobôDC" style="width:25%;display:block;margin:2rem auto">
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="abordagem-interdisciplinar-modular-e-anfitriã">Abordagem Interdisciplinar, Modular e Anfitriã<a href="#abordagem-interdisciplinar-modular-e-anfitriã" class="hash-link" aria-label="Link direto para Abordagem Interdisciplinar, Modular e Anfitriã" title="Link direto para Abordagem Interdisciplinar, Modular e Anfitriã" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="interdisciplinar">Interdisciplinar<a href="#interdisciplinar" class="hash-link" aria-label="Link direto para Interdisciplinar" title="Link direto para Interdisciplinar" translate="no">​</a></h3>
+<p>O RobôDC foi concebido para ser utilizado em diferentes contextos:</p>
+<ul>
+<li class="">disciplinas de robótica, sistemas embarcados, controle, IA, visão computacional, etc.;</li>
+<li class="">uso como anfitrião;</li>
+<li class="">projetos de pesquisa que necessitam de uma plataforma móvel;</li>
+<li class="">iniciativas de extensão que levem a robótica para outros públicos.</li>
+</ul>
+<p>Isso significa que o projeto precisa se manter <strong>compreensível</strong> para pessoas com formações e interesses distintos, o que motiva uma documentação clara e uma arquitetura organizada.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="modular">Modular<a href="#modular" class="hash-link" aria-label="Link direto para Modular" title="Link direto para Modular" translate="no">​</a></h3>
+<p>A modularidade é um dos pilares do RobôDC:</p>
+<ul>
+<li class=""><strong>No hardware:</strong> sensores, motores, fontes de energia e estruturas mecânicas podem ser substituídos ou reorganizados conforme a geração e o experimento.</li>
+<li class=""><strong>No software:</strong> nós e pacotes são estruturados para que possam ser ativados, desativados ou substituídos sem reescrever todo o sistema.</li>
+<li class=""><strong>Na documentação:</strong> as gerações e componentes são descritos de forma organizada, permitindo que novas contribuições sejam facilmente integradas.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="anfitriã">Anfitriã<a href="#anfitriã" class="hash-link" aria-label="Link direto para Anfitriã" title="Link direto para Anfitriã" translate="no">​</a></h3>
+<p>Chamar o RobôDC de <strong>plataforma anfitriã</strong> significa que:</p>
+<ul>
+<li class="">outros projetos podem “rodar em cima” do RobôDC, reutilizando sua base de hardware e software;</li>
+<li class="">novos módulos podem ser plugados sem a necessidade de criar um robô completamente novo;</li>
+<li class="">o projeto pode evoluir em <strong>gerações</strong>, mas mantendo um histórico de decisões, soluções e componentes reaproveitáveis.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="gerações-do-robôdc">Gerações do RobôDC<a href="#gerações-do-robôdc" class="hash-link" aria-label="Link direto para Gerações do RobôDC" title="Link direto para Gerações do RobôDC" translate="no">​</a></h2>
+<p>O projeto RobôDC é organizado em <strong>gerações</strong>, que representam grandes marcos de evolução do robô.</p>
+<p>Atualmente, a documentação cobre principalmente:</p>
+<ul>
+<li class=""><strong>Robô de 1ª Geração</strong>
+<ul>
+<li class="">Primeira materialização da plataforma.</li>
+<li class="">Foco em validar conceitos de base: locomoção, sensoriamento, arquitetura de software e infraestrutura de documentação.</li>
+</ul>
+</li>
+<li class=""><strong>Robô de 2ª Geração</strong>
+<ul>
+<li class="">Evolução da 1ª geração, incorporando melhorias de hardware, organização interna e arquitetura de software.</li>
+<li class="">Ajustes motivados por experiências práticas e necessidades identificadas nas atividades com a 1ª geração.</li>
+</ul>
+</li>
+</ul>
+<img src="/robodc-docs/img/basic_timeline.png" alt="Linha do tempo das gerações do RobôDC" style="width:100%;display:block;margin:4rem auto">
+<p>Cada geração possui:</p>
+<ul>
+<li class="">uma descrição geral;</li>
+<li class="">uma seção de hardware;</li>
+<li class="">uma seção de software, instalação e operação.</li>
+</ul>
+<p>Essas informações estão detalhadas nas páginas específicas de cada geração e podem ser consultadas conforme a necessidade de quem está utilizando o robô.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="organização-dos-repositórios">Organização dos Repositórios<a href="#organização-dos-repositórios" class="hash-link" aria-label="Link direto para Organização dos Repositórios" title="Link direto para Organização dos Repositórios" translate="no">​</a></h2>
+<p>Para apoiar a modularidade e a evolução por gerações, o código do RobôDC é organizado em <strong>repositórios separados</strong>, mas relacionados.</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">RoboDC (Organização)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── vivaldini/ROBO_DC              # Pacotes ROS 1 (1ª geração)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── thiagoaraujocampos/RoboDC      # Aplicativo móvel (Ionic/Angular)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── Hugo-Souza/RoboDC_api          # API REST (Flask/Python)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">└── thiagoaraujocampos/robodc-docs # Esta documentação</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="repositórios-principais">Repositórios Principais<a href="#repositórios-principais" class="hash-link" aria-label="Link direto para Repositórios Principais" title="Link direto para Repositórios Principais" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-vivaldinirobo_dc">1. vivaldini/ROBO_DC<a href="#1-vivaldinirobo_dc" class="hash-link" aria-label="Link direto para 1. vivaldini/ROBO_DC" title="Link direto para 1. vivaldini/ROBO_DC" translate="no">​</a></h3>
+<p><strong>Repositório</strong>: <a href="https://github.com/vivaldini/ROBO_DC" target="_blank" rel="noopener noreferrer" class="">https://github.com/vivaldini/ROBO_DC</a></p>
+<p><strong>Responsabilidade</strong>: Código ROS 1 do robô de 1ª geração</p>
+<p><strong>Conteúdo</strong>:</p>
+<ul>
+<li class="">Pacote <code>mobile_rob_dev</code>: Nó principal do robô, comunicação serial, odometria</li>
+<li class="">Pacote <code>mobile_rob_dev_sim</code>: Simulação no Gazebo</li>
+<li class="">Pacote <code>envrobotz</code>: Ambiente e configurações</li>
+<li class="">Subpasta <code>api/</code>: API Flask antiga (código legado, substituída pela RoboDC_api)</li>
+</ul>
+<p><strong>Tecnologias</strong>: ROS 1 Noetic, C++, Python, Gazebo</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-thiagoaraujocamposrobodc">2. thiagoaraujocampos/RoboDC<a href="#2-thiagoaraujocamposrobodc" class="hash-link" aria-label="Link direto para 2. thiagoaraujocampos/RoboDC" title="Link direto para 2. thiagoaraujocampos/RoboDC" translate="no">​</a></h3>
+<p><strong>Repositório</strong>: <a href="https://github.com/thiagoaraujocampos/RoboDC" target="_blank" rel="noopener noreferrer" class="">https://github.com/thiagoaraujocampos/RoboDC</a></p>
+<p><strong>Responsabilidade</strong>: Aplicativo móvel interativo para interação com o robô</p>
+<p><strong>Funcionalidades</strong>:</p>
+<ul>
+<li class=""><strong>Navegação guiada</strong>: Enviar robô para locais específicos do DC</li>
+<li class=""><strong>Cardápio do RU</strong>: Consulta do menu do Restaurante Universitário</li>
+<li class=""><strong>Detecção de expressões</strong>: Reconhecimento facial e emoções (Face API)</li>
+<li class=""><strong>Controle manual</strong>: Joystick virtual e controle por setas</li>
+<li class=""><strong>Multilíngue</strong>: Suporte para PT-BR e EN-US</li>
+<li class=""><strong>TTS (Text-to-Speech)</strong>: Feedback por voz</li>
+</ul>
+<p><strong>Tecnologias</strong>: Ionic 6, Angular 15, TypeScript, Capacitor, Face-API.js</p>
+<p><strong>Compatibilidade</strong>: Funciona com robôs de 1ª e 2ª geração</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="3-hugo-souzarobodc_api">3. Hugo-Souza/RoboDC_api<a href="#3-hugo-souzarobodc_api" class="hash-link" aria-label="Link direto para 3. Hugo-Souza/RoboDC_api" title="Link direto para 3. Hugo-Souza/RoboDC_api" translate="no">​</a></h3>
+<p><strong>Repositório</strong>: <a href="https://github.com/Hugo-Souza/RoboDC_api" target="_blank" rel="noopener noreferrer" class="">https://github.com/Hugo-Souza/RoboDC_api</a></p>
+<p><strong>Responsabilidade</strong>: API REST para controle e comunicação com o robô</p>
+<p><strong>Endpoints</strong>:</p>
+<ul>
+<li class=""><code>/ros/goal</code>: Lista destinos disponíveis</li>
+<li class=""><code>/ros/goTo/&lt;location&gt;</code>: Envia robô para local específico</li>
+<li class=""><code>/ros/status</code>: Retorna status da navegação</li>
+<li class=""><code>/ros/cancel</code>: Cancela objetivo atual</li>
+<li class=""><code>/led/changeExpression</code>: Controle de expressões faciais (LEDs)</li>
+<li class=""><code>/metadata/version</code>: Versão da API</li>
+</ul>
+<p><strong>Tecnologias</strong>: Flask, Flask-RESTX, ROS 1, Python, Bluetooth (para LEDs)</p>
+<p><strong>Versão Atual</strong>: v1.2.3</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="repositórios-do-robô-de-1ª-geração">Repositórios do Robô de 1ª Geração<a href="#repositórios-do-robô-de-1ª-geração" class="hash-link" aria-label="Link direto para Repositórios do Robô de 1ª Geração" title="Link direto para Repositórios do Robô de 1ª Geração" translate="no">​</a></h3>
+<p>Os repositórios da 1ª geração concentram:</p>
+<ul>
+<li class="">arquivos de hardware específicos;</li>
+<li class="">pacotes de software para a 1ª geração;</li>
+<li class="">scripts de instalação, configuração e operação;</li>
+<li class="">documentação mais detalhada, focada apenas nessa geração.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="repositórios-do-robô-de-2ª-geração">Repositórios do Robô de 2ª Geração<a href="#repositórios-do-robô-de-2ª-geração" class="hash-link" aria-label="Link direto para Repositórios do Robô de 2ª Geração" title="Link direto para Repositórios do Robô de 2ª Geração" translate="no">​</a></h3>
+<p>De forma análoga, os repositórios da 2ª geração inclui:</p>
+<ul>
+<li class="">ajustes e melhorias de hardware em relação à 1ª geração;</li>
+<li class="">implementação da pilha de software correspondente à arquitetura dessa geração;</li>
+<li class="">instruções de instalação e uso específicas;</li>
+<li class="">documentação complementar específicas da 2ª geração.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="como-esta-visão-se-conecta-ao-restante-da-documentação">Como Esta Visão se Conecta ao Restante da Documentação<a href="#como-esta-visão-se-conecta-ao-restante-da-documentação" class="hash-link" aria-label="Link direto para Como Esta Visão se Conecta ao Restante da Documentação" title="Link direto para Como Esta Visão se Conecta ao Restante da Documentação" translate="no">​</a></h2>
+<p>A partir desta página de <strong>Visão Geral do Projeto</strong>, você pode seguir para:</p>
+<ul>
+<li class=""><strong>Robô de 1ª Geração</strong><br>
+<!-- -->para detalhes de hardware, software, instalação e operação da primeira versão do robô.</li>
+<li class=""><strong>Robô de 2ª Geração</strong><br>
+<!-- -->para conhecer a evolução e as melhorias implementadas na segunda versão.</li>
+<li class=""><strong>Desenvolvimento no Projeto</strong><br>
+<!-- -->para entender como contribuir, abrir issues, propor mudanças e manter a coerência da plataforma.</li>
+</ul>
+<p>Esta organização busca garantir que o RobôDC seja uma <strong>plataforma viva</strong>, que possa continuar sendo usada e evoluída por novos colaboradores.</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/visao-geral.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar esta página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Páginas de documento"><a class="pagination-nav__link pagination-nav__link--prev" href="/robodc-docs/"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">Introdução ao RobôDC</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/robodc-docs/robo-1gen/visao-geral"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">Visão Geral</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#arquitetura-geral-do-robôdc" class="table-of-contents__link toc-highlight">Arquitetura Geral do RobôDC</a></li><li><a href="#abordagem-interdisciplinar-modular-e-anfitriã" class="table-of-contents__link toc-highlight">Abordagem Interdisciplinar, Modular e Anfitriã</a><ul><li><a href="#interdisciplinar" class="table-of-contents__link toc-highlight">Interdisciplinar</a></li><li><a href="#modular" class="table-of-contents__link toc-highlight">Modular</a></li><li><a href="#anfitriã" class="table-of-contents__link toc-highlight">Anfitriã</a></li></ul></li><li><a href="#gerações-do-robôdc" class="table-of-contents__link toc-highlight">Gerações do RobôDC</a></li><li><a href="#organização-dos-repositórios" class="table-of-contents__link toc-highlight">Organização dos Repositórios</a><ul><li><a href="#repositórios-principais" class="table-of-contents__link toc-highlight">Repositórios Principais</a></li><li><a href="#1-vivaldinirobo_dc" class="table-of-contents__link toc-highlight">1. vivaldini/ROBO_DC</a></li><li><a href="#2-thiagoaraujocamposrobodc" class="table-of-contents__link toc-highlight">2. thiagoaraujocampos/RoboDC</a></li><li><a href="#3-hugo-souzarobodc_api" class="table-of-contents__link toc-highlight">3. Hugo-Souza/RoboDC_api</a></li><li><a href="#repositórios-do-robô-de-1ª-geração" class="table-of-contents__link toc-highlight">Repositórios do Robô de 1ª Geração</a></li><li><a href="#repositórios-do-robô-de-2ª-geração" class="table-of-contents__link toc-highlight">Repositórios do Robô de 2ª Geração</a></li></ul></li><li><a href="#como-esta-visão-se-conecta-ao-restante-da-documentação" class="table-of-contents__link toc-highlight">Como Esta Visão se Conecta ao Restante da Documentação</a></li></ul></div></div></div></div></main></div></div></div></div>
+</body>
+</html>
