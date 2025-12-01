@@ -7,15 +7,7 @@ import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 const sidebars: SidebarsConfig = {
   docsSidebar: [
     'intro',
-    {
-      type: 'category',
-      label: 'Visão Geral dos Repositórios',
-      items: [
-        'repositorios/organizacao-geral',
-        'repositorios/repo-1gen',
-        'repositorios/repo-2gen',
-      ],
-    },
+    'visao-geral',
     {
       type: 'category',
       label: 'Robô de 1ª Geração',

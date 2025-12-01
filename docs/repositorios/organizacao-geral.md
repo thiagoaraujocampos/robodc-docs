@@ -12,10 +12,10 @@ O projeto RobôDC está organizado em **três repositórios principais**, cada u
 
 ```
 RoboDC (Organização)
-├── vivaldini/ROBO_DC              # Pacotes ROS 1 (1ª geração)
-├── thiagoaraujocampos/RoboDC      # Aplicativo móvel (Ionic/Angular)
-├── Hugo-Souza/RoboDC_api          # API REST (Flask/Python)
-└── thiagoaraujocampos/robodc-docs # Esta documentação
+├── vivaldini/ROBO_DC               # Pacotes ROS 1 (1ª geração)
+├── thiagoaraujocampos/RoboDC       # Aplicativo móvel (Ionic/Angular)
+├── Hugo-Souza/RoboDC_api           # API REST (Flask/Python)
+└── thiagoaraujocampos/robodc-docs  # Esta documentação
 ```
 
 ## Repositórios Principais
