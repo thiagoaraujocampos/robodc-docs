@@ -1,4 +1,26 @@
-# Website
+# RobôDC - Documentação
+
+Documentação oficial do projeto RobôDC, plataforma robótica móvel do Departamento de Computação da UFSCar.
+
+## Sobre o Projeto
+
+O **RobôDC** é uma plataforma interdisciplinar, modular e anfitriã para experimentação em robótica móvel. Esta documentação faz parte de um ecossistema de repositórios organizados através de submódulos Git.
+
+### Repositório Principal
+
+**URL**: https://github.com/thiagoaraujocampos/RoboDC
+
+O repositório principal utiliza **Git Submodules** para centralizar todos os componentes do projeto:
+- Pacotes ROS (1ª e 2ª geração)
+- Aplicativo móvel (Ionic/Angular)
+- API REST (Flask/Python)
+- Esta documentação
+
+Para mais informações sobre a organização dos repositórios, consulte a [documentação completa](https://robodc.dev.br).
+
+---
+
+## Website
 
 This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
 

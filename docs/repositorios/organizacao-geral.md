@@ -6,19 +6,38 @@ sidebar_position: 1
 
 ## Como o Projeto está Dividido em Repositórios
 
-O projeto RobôDC está organizado em **três repositórios principais**, cada um com responsabilidades específicas:
+O projeto RobôDC está organizado em **repositórios modulares**, cada um com responsabilidades específicas. Para facilitar o acesso e a gestão unificada, existe um **repositório principal com submódulos** que agrupa todos os componentes do projeto.
+
+### Repositório Principal (com Submódulos)
+
+**Repositório**: https://github.com/thiagoaraujocampos/RoboDC
+
+**Objetivo**: Centralizar todos os componentes do projeto RobôDC em um único local, utilizando **Git Submodules** para referenciar os repositórios individuais. Esta organização permite:
+
+- **Acesso unificado**: Clone todos os componentes do projeto com um único comando
+- **Versionamento coordenado**: Gerenciar versões específicas de cada submódulo de forma integrada
+- **Facilitar colaboração**: Novos desenvolvedores podem configurar todo o ambiente rapidamente
+- **Manter modularidade**: Cada submódulo continua sendo um repositório independente com seu próprio histórico
 
 ### Estrutura de Repositórios
 
 ```
-RoboDC (Organização)
-├── vivaldini/ROBO_DC               # Pacotes ROS 1 (1ª geração)
-├── thiagoaraujocampos/RoboDC       # Aplicativo móvel (Ionic/Angular)
-├── Hugo-Souza/RoboDC_api           # API REST (Flask/Python)
-└── thiagoaraujocampos/robodc-docs  # Esta documentação
+thiagoaraujocampos/RoboDC (Repositório Principal - Submódulos)
+├── ROBO_DC/                       # Submódulo: Pacotes ROS 1 (1ª geração)
+├── RoboDC_app/                    # Submódulo: Aplicativo móvel (Ionic/Angular)
+├── RoboDC_api/                    # Submódulo: API REST (Flask/Python)
+└── robodc-docs/                   # Submódulo: Esta documentação
+
+Repositórios individuais:
+├── vivaldini/ROBO_DC              # Pacotes ROS 1 (1ª geração)
+├── thiagoaraujocampos/RoboDC_app  # Aplicativo móvel (Ionic/Angular)
+├── Hugo-Souza/RoboDC_api          # API REST (Flask/Python)
+└── thiagoaraujocampos/robodc-docs # Esta documentação
 ```
 
-## Repositórios Principais
+## Repositórios Individuais
+
+Cada componente do projeto possui seu próprio repositório, que pode ser usado independentemente ou como parte do repositório principal (via submódulos).
 
 ### 1. vivaldini/ROBO_DC
 **Repositório**: https://github.com/vivaldini/ROBO_DC
@@ -33,8 +52,8 @@ RoboDC (Organização)
 
 **Tecnologias**: ROS 1 Noetic, C++, Python, Gazebo
 
-### 2. thiagoaraujocampos/RoboDC
-**Repositório**: https://github.com/thiagoaraujocampos/RoboDC
+### 2. thiagoaraujocampos/RoboDC_app
+**Repositório**: https://github.com/thiagoaraujocampos/RoboDC_app
 
 **Responsabilidade**: Aplicativo móvel interativo para interação com o robô
 

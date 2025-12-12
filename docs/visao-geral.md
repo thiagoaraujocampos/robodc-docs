@@ -88,12 +88,29 @@ Essas informações estão detalhadas nas páginas específicas de cada geraçã
 
 ## Organização dos Repositórios
 
-Para apoiar a modularidade e a evolução por gerações, o código do RobôDC é organizado em **repositórios separados**, mas relacionados.
+Para apoiar a modularidade e a evolução por gerações, o código do RoboDC é organizado em **repositórios separados**, mas relacionados. Um **repositório principal** utiliza Git Submodules para agrupar todos os componentes, facilitando o acesso unificado.
+
+### Repositório Principal (Submódulos)
+
+**URL**: https://github.com/thiagoaraujocampos/RoboDC
+
+Este repositório centraliza todos os componentes do projeto através de submódulos Git, permitindo que desenvolvedores clonem e gerenciem toda a infraestrutura do RobôDC de forma integrada, mantendo a modularidade de cada componente.
 
 ```
-RoboDC (Organização)
+thiagoaraujocampos/RoboDC (Repositório Principal)
+├── ROBO_DC/                       # Submódulo: Pacotes ROS 1 (1ª geração)
+├── RoboDC_app/                    # Submódulo: Aplicativo móvel (Ionic/Angular)
+├── RoboDC_api/                    # Submódulo: API REST (Flask/Python)
+└── robodc-docs/                   # Submódulo: Esta documentação
+```
+
+### Repositórios Individuais
+
+Cada componente mantém seu próprio repositório:
+
+```
 ├── vivaldini/ROBO_DC              # Pacotes ROS 1 (1ª geração)
-├── thiagoaraujocampos/RoboDC      # Aplicativo móvel (Ionic/Angular)
+├── thiagoaraujocampos/RoboDC_app  # Aplicativo móvel (Ionic/Angular)
 ├── Hugo-Souza/RoboDC_api          # API REST (Flask/Python)
 └── thiagoaraujocampos/robodc-docs # Esta documentação
 ```
