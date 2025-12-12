@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Repositório do Robô de 2ª Geração | RobôDC Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://thiagoaraujocampos.github.io/robodc-docs/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://thiagoaraujocampos.github.io/robodc-docs/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://thiagoaraujocampos.github.io/robodc-docs/repositorios/repo-2gen"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Repositório do Robô de 2ª Geração | RobôDC Docs"><meta data-rh="true" name="description" content="Informações do Repositório"><meta data-rh="true" property="og:description" content="Informações do Repositório"><link data-rh="true" rel="icon" href="/robodc-docs/img/icon.svg"><link data-rh="true" rel="canonical" href="https://thiagoaraujocampos.github.io/robodc-docs/repositorios/repo-2gen"><link data-rh="true" rel="alternate" href="https://thiagoaraujocampos.github.io/robodc-docs/repositorios/repo-2gen" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://thiagoaraujocampos.github.io/robodc-docs/repositorios/repo-2gen" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/robodc-docs/blog/rss.xml" title="RobôDC Docs RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/robodc-docs/blog/atom.xml" title="RobôDC Docs Atom Feed"><link rel="stylesheet" href="/robodc-docs/assets/css/styles.a3c3a098.css">
-<script src="/robodc-docs/assets/js/runtime~main.d105e07d.js" defer="defer"></script>
+<script src="/robodc-docs/assets/js/runtime~main.d8ee72b7.js" defer="defer"></script>
 <script src="/robodc-docs/assets/js/main.d143c7cc.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -16,40 +16,63 @@
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="informações-do-repositório">Informações do Repositório<a href="#informações-do-repositório" class="hash-link" aria-label="Link direto para Informações do Repositório" title="Link direto para Informações do Repositório" translate="no">​</a></h2>
 <ul>
 <li class=""><strong>Nome</strong>: robodc-2gen</li>
-<li class=""><strong>URL</strong>: [URL do repositório]</li>
-<li class=""><strong>Tecnologia Principal</strong>: ROS 2 (Robot Operating System 2)</li>
+<li class=""><strong>Tecnologia Principal</strong>: ROS 2 Humble (Robot Operating System 2)</li>
+<li class=""><strong>Build System</strong>: colcon</li>
+<li class=""><strong>Linguagens</strong>: Python, C++</li>
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="papéis-principais">Papéis Principais<a href="#papéis-principais" class="hash-link" aria-label="Link direto para Papéis Principais" title="Link direto para Papéis Principais" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="objetivo">Objetivo<a href="#objetivo" class="hash-link" aria-label="Link direto para Objetivo" title="Link direto para Objetivo" translate="no">​</a></h3>
-<p>[Descrever o objetivo principal deste repositório e como ele evolui em relação à 1ª geração]</p>
+<p>O repositório da 2ª geração contém a implementação completa do RobôDC usando ROS 2, representando uma evolução significativa em relação à 1ª geração. As principais motivações incluem:</p>
+<ul>
+<li class="">Migração para ROS 2 Humble para melhor suporte de longo prazo</li>
+<li class="">Arquitetura mais robusta e distribuída</li>
+<li class="">Uso de tecnologias modernas (Nav2, Behavior Trees, DDS)</li>
+<li class="">Melhor modularidade e manutenibilidade</li>
+<li class="">Suporte a recursos avançados não disponíveis no ROS 1</li>
+</ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="responsabilidades">Responsabilidades<a href="#responsabilidades" class="hash-link" aria-label="Link direto para Responsabilidades" title="Link direto para Responsabilidades" translate="no">​</a></h3>
 <ul>
 <li class="">Controle avançado do robô com ROS 2</li>
-<li class="">Processamento distribuído</li>
-<li class="">Implementação de novos algoritmos</li>
+<li class="">Navegação autônoma usando Nav2</li>
+<li class="">Processamento distribuído via DDS</li>
+<li class="">Implementação de algoritmos modernos de SLAM</li>
 <li class="">Melhor integração com sensores modernos</li>
-<li class="">Suporte a comunicação DDS</li>
+<li class="">Suporte a lifecycle management</li>
+<li class="">Behavior trees para lógica de comportamento</li>
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="estrutura-básica">Estrutura Básica<a href="#estrutura-básica" class="hash-link" aria-label="Link direto para Estrutura Básica" title="Link direto para Estrutura Básica" translate="no">​</a></h2>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">robodc-2gen/</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── src/</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   ├── navigation/       # Pacotes de navegação (Nav2)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   ├── perception/       # Pacotes de percepção</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   ├── control/          # Pacotes de controle</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   ├── drivers/          # Drivers de hardware</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   └── interfaces/       # Definições de msgs, srvs, actions</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── launch/               # Arquivos de lançamento Python</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── config/               # Arquivos YAML de configuração</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── params/               # Parâmetros ROS 2</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">└── scripts/              # Scripts auxiliares</span><br></span></code></pre></div></div>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ros2_ws/</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── src/</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   └── robodc-2gen/</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│       ├── robodc_bringup/       # Launch files principais</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│       ├── robodc_description/   # URDF, meshes, modelos</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│       ├── robodc_navigation/    # Nav2 e navegação</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│       ├── robodc_perception/    # Sensores e percepção</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│       ├── robodc_control/       # Controle e drivers</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│       ├── robodc_interfaces/    # Msgs, Srvs, Actions</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│       ├── robodc_behaviors/     # Behavior trees</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│       ├── robodc_simulation/    # Gazebo, mundos</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│       └── robodc_common/        # Utilitários compartilhados</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── build/                     # Arquivos de build</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── install/                   # Pacotes instalados</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">└── log/                       # Logs de compilação</span><br></span></code></pre></div></div>
+<p>Para detalhes sobre cada pacote, consulte a seção <a class="" href="/robodc-docs/robo-2gen/comecando/estrutura-repositorio">Estrutura do Repositório</a>.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="status-do-repositório">Status do Repositório<a href="#status-do-repositório" class="hash-link" aria-label="Link direto para Status do Repositório" title="Link direto para Status do Repositório" translate="no">​</a></h2>
 <ul>
-<li class=""><strong>Estado Atual</strong>: [Ativo/Em Desenvolvimento]</li>
-<li class=""><strong>Última Atualização</strong>: [Data]</li>
-<li class=""><strong>Versão do ROS</strong>: ROS 2 Humble (ou especificar versão)</li>
+<li class=""><strong>Estado Atual</strong>: Em desenvolvimento ativo</li>
+<li class=""><strong>Versão do ROS</strong>: ROS 2 Humble Hawksbill</li>
+<li class=""><strong>Sistema Operacional</strong>: Ubuntu 22.04 LTS (Jammy Jellyfish)</li>
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="melhorias-em-relação-à-1ª-geração">Melhorias em Relação à 1ª Geração<a href="#melhorias-em-relação-à-1ª-geração" class="hash-link" aria-label="Link direto para Melhorias em Relação à 1ª Geração" title="Link direto para Melhorias em Relação à 1ª Geração" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="arquitetura">Arquitetura<a href="#arquitetura" class="hash-link" aria-label="Link direto para Arquitetura" title="Link direto para Arquitetura" translate="no">​</a></h3>
 <ul>
-<li class="">Uso de ROS 2 com melhor suporte a tempo real</li>
-<li class="">Comunicação mais robusta via DDS</li>
-<li class="">Melhor modularização</li>
-<li class="">[Outras melhorias]</li>
+<li class=""><strong>ROS 2 vs ROS 1</strong>: Comunicação DDS distribuída ao invés de master centralizado</li>
+<li class=""><strong>Lifecycle nodes</strong>: Melhor controle de inicialização e finalização de componentes</li>
+<li class=""><strong>Modularidade</strong>: Separação mais clara de responsabilidades entre pacotes</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="navegação">Navegação<a href="#navegação" class="hash-link" aria-label="Link direto para Navegação" title="Link direto para Navegação" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Nav2</strong>: Stack de navegação moderna com behavior trees</li>
+<li class=""><strong>SLAM Toolbox</strong>: SLAM mais robusto que GMapping</li>
+<li class=""><strong>Planejadores avançados</strong>: Múltiplos planejadores disponíveis (NavFn, SmacPlanner, etc.)</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="desenvolvimento">Desenvolvimento<a href="#desenvolvimento" class="hash-link" aria-label="Link direto para Desenvolvimento" title="Link direto para Desenvolvimento" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>colcon</strong>: Build system mais flexível que catkin</li>
+<li class=""><strong>Python 3</strong>: Versão moderna de Python</li>
+<li class=""><strong>Launch files em Python</strong>: Maior flexibilidade e programação</li>
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="links-relacionados">Links Relacionados<a href="#links-relacionados" class="hash-link" aria-label="Link direto para Links Relacionados" title="Link direto para Links Relacionados" translate="no">​</a></h2>
 <ul>
-<li class="">[Link para o repositório]</li>
-<li class="">[Link para issues]</li>
-<li class="">[Link para documentação adicional]</li>
-</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/repositorios/repo-2gen.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar esta página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Páginas de documento"></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#informações-do-repositório" class="table-of-contents__link toc-highlight">Informações do Repositório</a></li><li><a href="#papéis-principais" class="table-of-contents__link toc-highlight">Papéis Principais</a><ul><li><a href="#objetivo" class="table-of-contents__link toc-highlight">Objetivo</a></li><li><a href="#responsabilidades" class="table-of-contents__link toc-highlight">Responsabilidades</a></li></ul></li><li><a href="#estrutura-básica" class="table-of-contents__link toc-highlight">Estrutura Básica</a></li><li><a href="#status-do-repositório" class="table-of-contents__link toc-highlight">Status do Repositório</a></li><li><a href="#melhorias-em-relação-à-1ª-geração" class="table-of-contents__link toc-highlight">Melhorias em Relação à 1ª Geração</a></li><li><a href="#links-relacionados" class="table-of-contents__link toc-highlight">Links Relacionados</a></li></ul></div></div></div></div></main></div></div></div></div>
+<li class="">Consulte a seção <a class="" href="/robodc-docs/repositorios/organizacao-geral">Repositório Principal</a> para informações sobre como acessar todos os repositórios via submódulos</li>
+<li class="">Veja <a class="" href="/robodc-docs/robo-2gen/visao-geral">Visão Geral - 2ª Geração</a> para entender as motivações e melhorias</li>
+<li class="">Consulte <a class="" href="/robodc-docs/robo-2gen/comecando/prerequisitos">Pré-requisitos</a> para começar a trabalhar com o repositório</li>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/repositorios/repo-2gen.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar esta página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Páginas de documento"></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#informações-do-repositório" class="table-of-contents__link toc-highlight">Informações do Repositório</a></li><li><a href="#papéis-principais" class="table-of-contents__link toc-highlight">Papéis Principais</a><ul><li><a href="#objetivo" class="table-of-contents__link toc-highlight">Objetivo</a></li><li><a href="#responsabilidades" class="table-of-contents__link toc-highlight">Responsabilidades</a></li></ul></li><li><a href="#estrutura-básica" class="table-of-contents__link toc-highlight">Estrutura Básica</a></li><li><a href="#status-do-repositório" class="table-of-contents__link toc-highlight">Status do Repositório</a></li><li><a href="#melhorias-em-relação-à-1ª-geração" class="table-of-contents__link toc-highlight">Melhorias em Relação à 1ª Geração</a><ul><li><a href="#arquitetura" class="table-of-contents__link toc-highlight">Arquitetura</a></li><li><a href="#navegação" class="table-of-contents__link toc-highlight">Navegação</a></li><li><a href="#desenvolvimento" class="table-of-contents__link toc-highlight">Desenvolvimento</a></li></ul></li><li><a href="#links-relacionados" class="table-of-contents__link toc-highlight">Links Relacionados</a></li></ul></div></div></div></div></main></div></div></div></div>
 </body>
 </html>

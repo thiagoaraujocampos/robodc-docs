@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Limitações Conhecidas | RobôDC Docs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://thiagoaraujocampos.github.io/robodc-docs/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://thiagoaraujocampos.github.io/robodc-docs/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://thiagoaraujocampos.github.io/robodc-docs/operacao/limitacoes"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Limitações Conhecidas | RobôDC Docs"><meta data-rh="true" name="description" content="Limitações da 1ª Geração"><meta data-rh="true" property="og:description" content="Limitações da 1ª Geração"><link data-rh="true" rel="icon" href="/robodc-docs/img/icon.svg"><link data-rh="true" rel="canonical" href="https://thiagoaraujocampos.github.io/robodc-docs/operacao/limitacoes"><link data-rh="true" rel="alternate" href="https://thiagoaraujocampos.github.io/robodc-docs/operacao/limitacoes" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://thiagoaraujocampos.github.io/robodc-docs/operacao/limitacoes" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Limitações Conhecidas","item":"https://thiagoaraujocampos.github.io/robodc-docs/operacao/limitacoes"}]}</script><link rel="alternate" type="application/rss+xml" href="/robodc-docs/blog/rss.xml" title="RobôDC Docs RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/robodc-docs/blog/atom.xml" title="RobôDC Docs Atom Feed"><link rel="stylesheet" href="/robodc-docs/assets/css/styles.a3c3a098.css">
-<script src="/robodc-docs/assets/js/runtime~main.d105e07d.js" defer="defer"></script>
+<script src="/robodc-docs/assets/js/runtime~main.d8ee72b7.js" defer="defer"></script>
 <script src="/robodc-docs/assets/js/main.d143c7cc.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -16,31 +16,87 @@
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="limitações-da-1ª-geração">Limitações da 1ª Geração<a href="#limitações-da-1ª-geração" class="hash-link" aria-label="Link direto para Limitações da 1ª Geração" title="Link direto para Limitações da 1ª Geração" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="hardware">Hardware<a href="#hardware" class="hash-link" aria-label="Link direto para Hardware" title="Link direto para Hardware" translate="no">​</a></h3>
 <ul>
-<li class="">[Limitação de hardware 1]</li>
-<li class="">[Limitação de hardware 2]</li>
+<li class=""><strong>Capacidade de bateria limitada</strong>: Autonomia de aproximadamente 2-3 horas em operação contínua</li>
+<li class=""><strong>LIDAR 2D apenas</strong>: Não detecta obstáculos acima ou abaixo do plano de varredura</li>
+<li class=""><strong>Potencia dos motores</strong>: Dificuldade em rampas mais íngremes ou superfícies com atrito elevado</li>
+<li class=""><strong>Precisão dos encoders</strong>: Deriva na odometria após longos períodos de operação</li>
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="software">Software<a href="#software" class="hash-link" aria-label="Link direto para Software" title="Link direto para Software" translate="no">​</a></h3>
 <ul>
-<li class="">[Limitação de software 1]</li>
-<li class="">[Limitação de software 2]</li>
+<li class=""><strong>ROS 1 descontinuado</strong>: Suporte oficial termina em 2025, dificultando manutenção futura</li>
+<li class=""><strong>Dependência do roscore</strong>: Ponto único de falha; se o roscore cair, todo o sistema para</li>
+<li class=""><strong>Navigation Stack legado</strong>: Menos flexível que Nav2, sem behavior trees</li>
+<li class=""><strong>Sem lifecycle management</strong>: Dificuldade em reiniciar componentes sem derrubar todo o sistema</li>
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="operacionais">Operacionais<a href="#operacionais" class="hash-link" aria-label="Link direto para Operacionais" title="Link direto para Operacionais" translate="no">​</a></h3>
 <ul>
-<li class="">[Limitação operacional 1]</li>
-<li class="">[Limitação operacional 2]</li>
+<li class=""><strong>Sensibilidade à iluminação</strong>: Câmeras podem ter desempenho reduzido em ambientes muito escuros ou com muita luz direta</li>
+<li class=""><strong>Piso irregular</strong>: Dificuldade em superfícies irregulares ou com desníveis</li>
+<li class=""><strong>Obstáculos transparentes</strong>: Vidros e superfícies transparentes podem não ser detectados pelo LIDAR</li>
+<li class=""><strong>Ambientes dinâmicos</strong>: Dificuldade com muitas pessoas se movendo simultaneamente</li>
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="limitações-da-2ª-geração">Limitações da 2ª Geração<a href="#limitações-da-2ª-geração" class="hash-link" aria-label="Link direto para Limitações da 2ª Geração" title="Link direto para Limitações da 2ª Geração" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="em-desenvolvimento">Em Desenvolvimento<a href="#em-desenvolvimento" class="hash-link" aria-label="Link direto para Em Desenvolvimento" title="Link direto para Em Desenvolvimento" translate="no">​</a></h3>
+<p>A 2ª geração ainda está em desenvolvimento ativo. Algumas funcionalidades planejadas mas ainda não completamente implementadas:</p>
 <ul>
-<li class="">[Feature ainda não implementada 1]</li>
-<li class="">[Feature ainda não implementada 2]</li>
+<li class=""><strong>Behavior trees complexos</strong>: BTs avançados para comportamentos adaptativos</li>
+<li class=""><strong>Fusão de sensores avançada</strong>: Integração otimizada de múltiplos sensores</li>
+<li class=""><strong>Recuperação automática</strong>: Comportamentos de auto-recuperação em situações de falha</li>
+<li class=""><strong>Navegação social</strong>: Consideração explícita de convenções sociais na navegação</li>
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="conhecidas">Conhecidas<a href="#conhecidas" class="hash-link" aria-label="Link direto para Conhecidas" title="Link direto para Conhecidas" translate="no">​</a></h3>
 <ul>
-<li class="">[Limitação conhecida 1]</li>
-<li class="">[Limitação conhecida 2]</li>
+<li class=""><strong>Curva de aprendizado ROS 2</strong>: ROS 2 é mais complexo que ROS 1, especialmente para iniciantes</li>
+<li class=""><strong>Documentacao de alguns pacotes</strong>: Alguns pacotes ROS 2 ainda têm documentação menos completa que equivalentes ROS 1</li>
+<li class=""><strong>Compatibilidade com hardware legado</strong>: Alguns drivers de sensores ainda não foram portados para ROS 2</li>
+<li class=""><strong>Performance em hardware limitado</strong>: ROS 2 pode consumir mais recursos que ROS 1</li>
 </ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="workarounds">Workarounds<a href="#workarounds" class="hash-link" aria-label="Link direto para Workarounds" title="Link direto para Workarounds" translate="no">​</a></h2>
-<p>[Soluções temporárias para limitações conhecidas]</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/operacao/limitacoes.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar esta página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Páginas de documento"><a class="pagination-nav__link pagination-nav__link--prev" href="/robodc-docs/operacao/procedimentos-seguranca"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">Procedimentos de Segurança</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/robodc-docs/metodologia/metodologia-experimentacao"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">Metodologia de Experimentação</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#limitações-da-1ª-geração" class="table-of-contents__link toc-highlight">Limitações da 1ª Geração</a><ul><li><a href="#hardware" class="table-of-contents__link toc-highlight">Hardware</a></li><li><a href="#software" class="table-of-contents__link toc-highlight">Software</a></li><li><a href="#operacionais" class="table-of-contents__link toc-highlight">Operacionais</a></li></ul></li><li><a href="#limitações-da-2ª-geração" class="table-of-contents__link toc-highlight">Limitações da 2ª Geração</a><ul><li><a href="#em-desenvolvimento" class="table-of-contents__link toc-highlight">Em Desenvolvimento</a></li><li><a href="#conhecidas" class="table-of-contents__link toc-highlight">Conhecidas</a></li></ul></li><li><a href="#workarounds" class="table-of-contents__link toc-highlight">Workarounds</a></li></ul></div></div></div></div></main></div></div></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="limitações-gerais-ambas-gerações">Limitações Gerais (Ambas Gerações)<a href="#limitações-gerais-ambas-gerações" class="hash-link" aria-label="Link direto para Limitações Gerais (Ambas Gerações)" title="Link direto para Limitações Gerais (Ambas Gerações)" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ambiente-de-operação">Ambiente de Operação<a href="#ambiente-de-operação" class="hash-link" aria-label="Link direto para Ambiente de Operação" title="Link direto para Ambiente de Operação" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Apenas ambientes internos</strong>: Não projetado para operação externa (chuva, terrenos irregulares)</li>
+<li class=""><strong>Temperatura</strong>: Operação ideal entre 0°C e 40°C</li>
+<li class=""><strong>Inclinação máxima</strong>: Rampas com inclinação superior a 15° podem comprometer operação</li>
+<li class=""><strong>Superfícies</strong>: Melhor desempenho em pisos lisos e regulares</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="segurança">Segurança<a href="#segurança" class="hash-link" aria-label="Link direto para Segurança" title="Link direto para Segurança" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Operação supervisionada</strong>: Recomenda-se supervisão humana durante operação autônoma</li>
+<li class=""><strong>Velocidade limitada</strong>: Velocidade máxima restrita para garantir segurança</li>
+<li class=""><strong>Detecção de pequenos objetos</strong>: Objetos muito pequenos ou próximos ao chão podem não ser detectados</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="funcionalidades">Funcionalidades<a href="#funcionalidades" class="hash-link" aria-label="Link direto para Funcionalidades" title="Link direto para Funcionalidades" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>Sem manipulação</strong>: Não possui braço robótico para pegar objetos</li>
+<li class=""><strong>Interação limitada</strong>: Interação humano-robô ainda básica</li>
+<li class=""><strong>Processamento local</strong>: Limitações de processamento no computador embarcado</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="workarounds-e-soluções-temporárias">Workarounds e Soluções Temporárias<a href="#workarounds-e-soluções-temporárias" class="hash-link" aria-label="Link direto para Workarounds e Soluções Temporárias" title="Link direto para Workarounds e Soluções Temporárias" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="para-deriva-de-odometria">Para Deriva de Odometria<a href="#para-deriva-de-odometria" class="hash-link" aria-label="Link direto para Para Deriva de Odometria" title="Link direto para Para Deriva de Odometria" translate="no">​</a></h3>
+<ul>
+<li class="">Usar AMCL (Adaptive Monte Carlo Localization) para corrigir posição com base no mapa</li>
+<li class="">Recalibrar periodicamente a pose do robô</li>
+<li class="">Integrar IMU para melhorar precisão da odometria</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="para-bateria-limitada">Para Bateria Limitada<a href="#para-bateria-limitada" class="hash-link" aria-label="Link direto para Para Bateria Limitada" title="Link direto para Para Bateria Limitada" translate="no">​</a></h3>
+<ul>
+<li class="">Implementar estações de recarga automática (em desenvolvimento)</li>
+<li class="">Monitorar constantemente nível de bateria e retornar à base quando necessário</li>
+<li class="">Otimizar rotas para minimizar consumo de energia</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="para-obstáculos-transparentes">Para Obstáculos Transparentes<a href="#para-obstáculos-transparentes" class="hash-link" aria-label="Link direto para Para Obstáculos Transparentes" title="Link direto para Para Obstáculos Transparentes" translate="no">​</a></h3>
+<ul>
+<li class="">Usar câmeras para detectar vidros e superfícies refletivas</li>
+<li class="">Marcar áreas com vidro no mapa estático</li>
+<li class="">Adicionar sensores complementares (ultrassom, infravermelho)</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="para-ambientes-dinâmicos">Para Ambientes Dinâmicos<a href="#para-ambientes-dinâmicos" class="hash-link" aria-label="Link direto para Para Ambientes Dinâmicos" title="Link direto para Para Ambientes Dinâmicos" translate="no">​</a></h3>
+<ul>
+<li class="">Ajustar parâmetros do planejador local para ser mais conservador</li>
+<li class="">Usar costmap inflation maior</li>
+<li class="">Reduzir velocidade máxima em áreas com alta movimentação</li>
+</ul>
+<hr>
+<p><em>Esta lista é atualizada conforme novas limitações são descobertas e soluções são desenvolvidas.</em></p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/operacao/limitacoes.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar esta página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Páginas de documento"><a class="pagination-nav__link pagination-nav__link--prev" href="/robodc-docs/operacao/procedimentos-seguranca"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">Procedimentos de Segurança</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/robodc-docs/metodologia/metodologia-experimentacao"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">Metodologia de Experimentação</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#limitações-da-1ª-geração" class="table-of-contents__link toc-highlight">Limitações da 1ª Geração</a><ul><li><a href="#hardware" class="table-of-contents__link toc-highlight">Hardware</a></li><li><a href="#software" class="table-of-contents__link toc-highlight">Software</a></li><li><a href="#operacionais" class="table-of-contents__link toc-highlight">Operacionais</a></li></ul></li><li><a href="#limitações-da-2ª-geração" class="table-of-contents__link toc-highlight">Limitações da 2ª Geração</a><ul><li><a href="#em-desenvolvimento" class="table-of-contents__link toc-highlight">Em Desenvolvimento</a></li><li><a href="#conhecidas" class="table-of-contents__link toc-highlight">Conhecidas</a></li></ul></li><li><a href="#limitações-gerais-ambas-gerações" class="table-of-contents__link toc-highlight">Limitações Gerais (Ambas Gerações)</a><ul><li><a href="#ambiente-de-operação" class="table-of-contents__link toc-highlight">Ambiente de Operação</a></li><li><a href="#segurança" class="table-of-contents__link toc-highlight">Segurança</a></li><li><a href="#funcionalidades" class="table-of-contents__link toc-highlight">Funcionalidades</a></li></ul></li><li><a href="#workarounds-e-soluções-temporárias" class="table-of-contents__link toc-highlight">Workarounds e Soluções Temporárias</a><ul><li><a href="#para-deriva-de-odometria" class="table-of-contents__link toc-highlight">Para Deriva de Odometria</a></li><li><a href="#para-bateria-limitada" class="table-of-contents__link toc-highlight">Para Bateria Limitada</a></li><li><a href="#para-obstáculos-transparentes" class="table-of-contents__link toc-highlight">Para Obstáculos Transparentes</a></li><li><a href="#para-ambientes-dinâmicos" class="table-of-contents__link toc-highlight">Para Ambientes Dinâmicos</a></li></ul></li></ul></div></div></div></div></main></div></div></div></div>
 </body>
 </html>
