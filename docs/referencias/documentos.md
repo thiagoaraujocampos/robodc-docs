@@ -4,30 +4,37 @@ sidebar_position: 1
 
 # Documentos
 
-## TCC (Trabalho de Conclusão de Curso)
+Esta seção concentra documentos oficiais relacionados ao projeto RobôDC.
 
-[Link para TCC quando disponível]
+## Documentação Técnica
 
-### Resumo
-[Resumo do TCC]
+A documentação técnica completa do projeto está disponível neste site e cobre:
 
-### Principais Contribuições
-- [Contribuição 1]
-- [Contribuição 2]
-- [Contribuição 3]
+- Visão geral do projeto e arquitetura
+- Especificações de hardware das gerações 1 e 2
+- Arquitetura de software e pacotes ROS
+- Guias de instalação e operação
+- Procedimentos de segurança e manutenção
+- Organização dos repositórios
 
-## Relatórios Parciais
+## Trabalhos Acadêmicos
 
-### Relatório 1
-[Link e descrição]
+### Trabalhos de Conclusão de Curso (TCC)
 
-### Relatório 2
-[Link e descrição]
+Trabalhos acadêmicos relacionados ao desenvolvimento do RobôDC serão listados aqui quando disponibilizados.
 
-## Apresentações
+### Dissertações e Teses
 
-[Links para slides de apresentações]
+Pesquisas de pós-graduação relacionadas ao projeto serão referenciadas nesta seção.
 
-## Artigos Relacionados
+## Apresentações e Publicações
 
-[Se houver artigos publicados]
+Apresentações técnicas, artigos científicos e materiais de divulgação do projeto serão disponibilizados aqui.
+
+## Relatórios Técnicos
+
+Relatórios de desenvolvimento, experimentos e testes realizados com o RobôDC.
+
+---
+
+*Esta seção será atualizada conforme novos documentos forem produzidos e disponibilizados pela equipe.*

@@ -7,52 +7,82 @@ sidebar_position: 3
 ## Informações do Repositório
 
 - **Nome**: robodc-2gen
-- **URL**: [URL do repositório]
-- **Tecnologia Principal**: ROS 2 (Robot Operating System 2)
+- **Tecnologia Principal**: ROS 2 Humble (Robot Operating System 2)
+- **Build System**: colcon
+- **Linguagens**: Python, C++
 
 ## Papéis Principais
 
 ### Objetivo
-[Descrever o objetivo principal deste repositório e como ele evolui em relação à 1ª geração]
+
+O repositório da 2ª geração contém a implementação completa do RobôDC usando ROS 2, representando uma evolução significativa em relação à 1ª geração. As principais motivações incluem:
+
+- Migração para ROS 2 Humble para melhor suporte de longo prazo
+- Arquitetura mais robusta e distribuída
+- Uso de tecnologias modernas (Nav2, Behavior Trees, DDS)
+- Melhor modularidade e manutenibilidade
+- Suporte a recursos avançados não disponíveis no ROS 1
 
 ### Responsabilidades
+
 - Controle avançado do robô com ROS 2
-- Processamento distribuído
-- Implementação de novos algoritmos
+- Navegação autônoma usando Nav2
+- Processamento distribuído via DDS
+- Implementação de algoritmos modernos de SLAM
 - Melhor integração com sensores modernos
-- Suporte a comunicação DDS
+- Suporte a lifecycle management
+- Behavior trees para lógica de comportamento
 
 ## Estrutura Básica
 
 ```
-robodc-2gen/
+ros2_ws/
 ├── src/
-│   ├── navigation/       # Pacotes de navegação (Nav2)
-│   ├── perception/       # Pacotes de percepção
-│   ├── control/          # Pacotes de controle
-│   ├── drivers/          # Drivers de hardware
-│   └── interfaces/       # Definições de msgs, srvs, actions
-├── launch/               # Arquivos de lançamento Python
-├── config/               # Arquivos YAML de configuração
-├── params/               # Parâmetros ROS 2
-└── scripts/              # Scripts auxiliares
+│   └── robodc-2gen/
+│       ├── robodc_bringup/       # Launch files principais
+│       ├── robodc_description/   # URDF, meshes, modelos
+│       ├── robodc_navigation/    # Nav2 e navegação
+│       ├── robodc_perception/    # Sensores e percepção
+│       ├── robodc_control/       # Controle e drivers
+│       ├── robodc_interfaces/    # Msgs, Srvs, Actions
+│       ├── robodc_behaviors/     # Behavior trees
+│       ├── robodc_simulation/    # Gazebo, mundos
+│       └── robodc_common/        # Utilitários compartilhados
+├── build/                     # Arquivos de build
+├── install/                   # Pacotes instalados
+└── log/                       # Logs de compilação
 ```
+
+Para detalhes sobre cada pacote, consulte a seção [Estrutura do Repositório](../robo-2gen/comecando/estrutura-repositorio.md).
 
 ## Status do Repositório
 
-- **Estado Atual**: [Ativo/Em Desenvolvimento]
-- **Última Atualização**: [Data]
-- **Versão do ROS**: ROS 2 Humble (ou especificar versão)
+- **Estado Atual**: Em desenvolvimento ativo
+- **Versão do ROS**: ROS 2 Humble Hawksbill
+- **Sistema Operacional**: Ubuntu 22.04 LTS (Jammy Jellyfish)
 
 ## Melhorias em Relação à 1ª Geração
 
-- Uso de ROS 2 com melhor suporte a tempo real
-- Comunicação mais robusta via DDS
-- Melhor modularização
-- [Outras melhorias]
+### Arquitetura
+
+- **ROS 2 vs ROS 1**: Comunicação DDS distribuída ao invés de master centralizado
+- **Lifecycle nodes**: Melhor controle de inicialização e finalização de componentes
+- **Modularidade**: Separação mais clara de responsabilidades entre pacotes
+
+### Navegação
+
+- **Nav2**: Stack de navegação moderna com behavior trees
+- **SLAM Toolbox**: SLAM mais robusto que GMapping
+- **Planejadores avançados**: Múltiplos planejadores disponíveis (NavFn, SmacPlanner, etc.)
+
+### Desenvolvimento
+
+- **colcon**: Build system mais flexível que catkin
+- **Python 3**: Versão moderna de Python
+- **Launch files em Python**: Maior flexibilidade e programação
 
 ## Links Relacionados
 
-- [Link para o repositório]
-- [Link para issues]
-- [Link para documentação adicional]
+- Consulte a seção [Repositório Principal](organizacao-geral.md) para informações sobre como acessar todos os repositórios via submódulos
+- Veja [Visão Geral - 2ª Geração](../robo-2gen/visao-geral.md) para entender as motivações e melhorias
+- Consulte [Pré-requisitos](../robo-2gen/comecando/prerequisitos.md) para começar a trabalhar com o repositório

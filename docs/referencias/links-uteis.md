@@ -7,9 +7,11 @@ sidebar_position: 3
 ## Repositórios
 
 ### Projeto RobôDC
-- [RobôDC 1ª Geração](https://github.com/[org]/robodc-1gen)
-- [RobôDC 2ª Geração](https://github.com/[org]/robodc-2gen)
-- [Documentação](https://github.com/[org]/robodc-docs)
+- [Repositório Principal (Submódulos)](https://github.com/thiagoaraujocampos/RoboDC)
+- [RobôDC 1ª Geração](https://github.com/vivaldini/ROBO_DC)
+- [RobôDC App Mobile](https://github.com/thiagoaraujocampos/RoboDC_app)
+- [RobôDC API](https://github.com/Hugo-Souza/RoboDC_api)
+- [Documentação](https://github.com/thiagoaraujocampos/robodc-docs)
 
 ## ROS
 

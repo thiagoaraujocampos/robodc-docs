@@ -336,7 +336,7 @@ source ~/ros2_ws/install/setup.bash
 
 # Recompilar o pacote
 cd ~/ros2_ws
-colcon build --packages-select [NOME_DO_PACOTE]
+colcon build --packages-select robodc_bringup
 source install/setup.bash
 ```
 

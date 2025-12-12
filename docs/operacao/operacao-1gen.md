@@ -269,7 +269,7 @@ Manter registro de:
 
 ## Vídeos e Tutoriais
 
-[Links para vídeos demonstrativos quando disponíveis]
+Vídeos demonstrativos e tutoriais específicos serão disponibilizados conforme forem produzidos pela equipe:
 
 - Tutorial: Primeira Inicialização
 - Tutorial: Navegação Autônoma

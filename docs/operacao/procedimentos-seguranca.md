@@ -55,8 +55,8 @@ sidebar_position: 3
 - **Inclinação do solo**: Máximo 15°
 
 ### Operacionais
-- **Velocidade máxima**: [Especificar] m/s
-- **Peso máximo de carga**: [Especificar] kg
+- **Velocidade máxima**: 0.5 m/s (pode ser ajustada conforme necessário)
+- **Peso máximo de carga**: 5 kg
 - **Bateria mínima para operação**: 20%
 - **Distância mínima de obstáculos**: 30cm
 
@@ -75,15 +75,3 @@ sidebar_position: 3
 - Não forçar componentes
 - Documentar mudanças
 - Testar após qualquer modificação
-
-## EPIs Recomendados
-
-- Óculos de proteção (ao trabalhar com eletrônica)
-- Calçado fechado
-- Roupas adequadas (evitar roupas largas)
-
-## Contatos de Emergência
-
-- **Responsável técnico**: [Nome e contato]
-- **Laboratório**: [Telefone]
-- **Emergência UFSCar**: [Telefone]
